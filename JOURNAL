@@ -1,0 +1,67 @@
+December 5, 2011
+
+Followed instructions in github setup to create initial repo including for this instruction manual.
+
+rob@wrath:~/bcd396t$ git init
+Initialized empty Git repository in /home/rob/bcd396t/.git/
+rob@wrath:~/bcd396t$   touch README
+rob@wrath:~/bcd396t$   git add README
+rob@wrath:~/bcd396t$   git commit -m 'first commit'
+[master (root-commit) 7c1bbee] first commit
+ 0 files changed, 0 insertions(+), 0 deletions(-)
+ create mode 100644 README
+rob@wrath:~/bcd396t$   git remote add origin git@github.com:vees/bcd396t.git
+rob@wrath:~/bcd396t$   git push -u origin master
+Counting objects: 3, done.
+Writing objects: 100% (3/3), 204 bytes, done.
+Total 3 (delta 0), reused 0 (delta 0)
+To git@github.com:vees/bcd396t.git
+ * [new branch]      master -> master
+Branch master set up to track remote branch master from origin.
+
+
+First step is to acquire more information about any other applications, libraries, API, or control code that might already do what I want.
+
+Found a library called hamlib that says it has a link to Python.
+
+The spec sheet for the Uniden BCD-396T is model #810, located at:
+
+http://hamlib.sourceforge.net/sup-info/support/model810.txt
+
+Overall backend warnings: 0
+
+
+
+Found the following code in hamlib repository:
+
+http://hamlib.git.sourceforge.net/git/gitweb.cgi?p=hamlib/hamlib;a=blob;f=uniden/uniden_digital.c;h=e42939f7efb49e2a79b8a30e34a3899a000d604b;hb=HEAD
+
+Thread in radioreference:
+
+http://forums.radioreference.com/scanner-programming-software/39530-new-radios-old-problem-no-solution.html
+
+http://forums.radioreference.com/uniden-scanners/162214-bcd996xt-software-rs232-control-protocols.html
+
+
+
+Got minicom working on /dev/ttyUSB0 and sent a few commands:
+
+STS,011000,                ,,Baltimore County,,N     ID SCA �  ,, 859.9625       ,,S0:1*****-*--   ,,GRP1*****78*-   ,,1,1,0,0
+STS,011000,          ��    ,,Baltimore County,,  ID SCAN    �  ,, 859.9625       ,,S0:1*****-*--   ,,GRP1*****78*-   ,,1,1,0,0
+STS,011000,                ,,Baltimore County,,D SCAN     I �  ,, 859.9625       ,,S0:-*****-*--   ,,GRP1*****78*-   ,,1,1,0,0
+STS,011000,                ,,Fire Dispatch   ,,Western Fire 4  ,, 858.9625       ,,S0:-*****-*--   ,,GRP1*****-8*-   ,,1,1,0,0
+GID,,,,,,
+
+
+Using manual file downloaded from:
+
+http://www.scannerdesk.com/joomla/files/uniden/396T/BCD396T_Protocol.pdf
+
+
+December 6, 2011
+
+Found pyserial:
+
+http://pyserial.sourceforge.net/pyserial_api.html
+
+

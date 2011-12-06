@@ -13,7 +13,7 @@ try:
 	lastchange = datetime.datetime.now()
 	while 1:
 		ser.write("GLG\r")
-		bcdreply = ser.read(ser.inWaiting())
+		bcdreply = ser.read(ser.inWaiting())[:-3]
 		#'GLG,80,NFM,0,0,Baltimore County,Fire Dispatch,Eastern Fire 3,1,0\r'
 		if (bcdreply != bcdreplyprev): 
 			now = datetime.datetime.now()
@@ -22,7 +22,9 @@ try:
 			print now_ts + '\tBEG\t0\t' + bcdreply.strip('\r')
 			lastchange = now
 			bcdreplyprev=bcdreply
-		time.sleep(.5)
+		time.sleep(.2)
 except KeyboardInterrupt:
+	print "Cleaning up to end"
 	ser.close()
+	print "End"
 

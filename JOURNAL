@@ -98,3 +98,39 @@ Serial<id=0xb787d8ec, open=True>(port='/dev/ttyUSB0', baudrate=115200, bytesize=
 'GLG,80,NFM,0,0,Baltimore County,Fire Dispatch,Eastern Fire 3,1,0\r'
 >>> 
 
+
+
+Channel list activate/deactivate:
+
+PRG                                                                                              
+PRG,OK                                                                                           
+QSL
+QSL,1222220200,0000000000,0000000000,0000000000,0000000000,0000000000,0000000000,0000000000,0000000000,0000000000
+QGL,1
+QGL,ERR
+SIH
+SIH,5285
+QSL,PAGE0
+QSL,ERR
+QSL,0
+QSL,ERR
+QSL
+QSL,1222220200,0000000000,0000000000,0000000000,0000000000,0000000000,0000000000,0000000000,0000000000,0000000000
+SIN,5285
+SIN,M82S,Baltimore County,1,2,0,2,,AUTO,0,AUTO,8,-1,5166,5287,5287,4
+QSL,5285
+QSL,ERR
+QGL,5285
+QGL,1122221120
+QGL,5285,1222221220
+QGL,OK
+EPG
+EPG,OK
+KEY,S,P
+KEY,OK
+SYS
+ERR
+STS
+STS,011000,          ��    ,,Baltimore County,,Eastern Fire 3  ,, 860.4625       ,,S0:1*****-*--   ,,GRP1*****7**-   ,,1,0,0,0
+
+

@@ -64,4 +64,37 @@ Found pyserial:
 
 http://pyserial.sourceforge.net/pyserial_api.html
 
+rob@diligence:~$ python -i serinit.py
+>>> ser
+Serial<id=0xb787d8ec, open=True>(port='/dev/ttyUSB0', baudrate=115200, bytesize=8, parity='N', stopbits=1, timeout=None, xonxoff=0, rtscts=0, dsrdtr=0)
+>>> ser.isWaiting()
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+AttributeError: 'Serial' object has no attribute 'isWaiting'
+>>> ser.inWaiting()
+0
+>>> ser.write("STS\n\r")
+>>> ser
+Serial<id=0xb787d8ec, open=True>(port='/dev/ttyUSB0', baudrate=115200, bytesize=8, parity='N', stopbits=1, timeout=None, xonxoff=0, rtscts=0, dsrdtr=0)
+>>> ser.inWaiting()
+4
+>>> ser.read(4)
+'ERR\r'
+>>> ser.write("STS\r")
+>>> ser.inWaiting()
+127
+>>> ser.read(127)
+'STS,011000,          \xac\xad    ,,Baltimore County,,SCAN     ID  \x82  ,, 860.9625       ,,S0:-*****-*--   ,,GRP1*****78*-   ,,1,1,0,0\r'
+>>> ser.inWaiting()
+0
+>>> ser.write("STS\r")
+>>> ser.read(ser.inWaiting())
+'STS,011000,          \xac\xad    ,,Baltimore County,,Eastern Fire 3  ,, 858.9625       ,,S0:1*****-*--   ,,GRP1*****78*-   ,,1,0,0,0\r'
+>>> ser.write("STS\r")
+>>> ser.read(ser.inWaiting())
+'STS,011000,          \xac\xad    ,,Baltimore County,,Central Fire 2  ,, 858.2125       ,,S0:-*****-*--   ,,GRP1*****-8*-   ,,1,0,0,0\r'
+>>> ser.write("GLG\r")
+>>> ser.read(ser.inWaiting())
+'GLG,80,NFM,0,0,Baltimore County,Fire Dispatch,Eastern Fire 3,1,0\r'
+>>> 
 

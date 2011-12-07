@@ -134,3 +134,72 @@ STS
 STS,011000,          ��    ,,Baltimore County,,Eastern Fire 3  ,, 860.4625       ,,S0:1*****-*--   ,,GRP1*****7**-   ,,1,0,0,0
 
 
+
+Ben suggested using shared queues for the client and server to exchange information about which quick groups to activate instead of exposing a secured API to the public.
+
+If we build the security all on the server side then there's little work left to be done on the client, for example:
+
+1. Client contacts the server and provides a list of all the channels that are available on the scanner and their state. Server saves these channels locally for use between contacts with the client.
+
+2. The server can display a list of the available channels to users that show up and which ones are active since the last communication from the server.
+
+3. Users on the server select and vote and the server makes all the decisions about which channels should be selected.
+
+4. The client contacts the server again on schedule and downloads a list of the channels the server believes should be active.
+
+5. The client compares this list against a current list of active channels and sets a new QGL if one is necessary.
+
+6. Client repeats from the step 1.
+
+
+
+A good exercise will be to run this client/server setup using the quick groups in bank 1.  There are 9 slots, so if both client and server version 0 know this, it's easy to exchange the information.
+
+Send to server:
+
+PRG
+PRG,OK
+QGL,5285
+QGL,1122221120
+EPG
+EPG,OK
+KEY,S,P
+KEY,OK
+
+We always want to return to scanning at the end of a program transaction.
+
+Client saves: 1122221120
+Server saves: 1122221120
+
+Server makes changes, decides to send packet back with all channels enabled as 1111111110:
+
+Server sends: 1111111110
+Client compares 1111111110 to 1122221120
+
+Client sees a difference, calls:
+
+PRG
+PRG,OK
+QGL,5285,1111111110
+QGL,OK
+QGL,5285
+QGL,1111111110
+EPG
+EPG,OK
+KEY,S,P
+KEY,OK
+
+Client sends: 1111111110 (confirmation)
+Client saves: 1111111110
+Server saves: 1111111110
+
+Now every quick group available are selected, and we're back to scanning.
+
+
+
+Assuming this happens only when the server has decided that enough has changed, the radio should only go into program mode once every few minutes at the most, and it can always wait for a break in the action by doing a GID for no channel in order to not interrupt an active transmission. This is better than trying to toggle buttons on the keypad by taking the output of STS and going KEY inputs of the group codes.
+
+
+
+The only thing the radio and the server need to share are the QGL's ID of 5285.
+

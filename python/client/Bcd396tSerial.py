@@ -28,6 +28,17 @@ class Bcd396tSerial:
 		for command in command_list:
 			self.send_serial_command(command[0],command[1])
 
+	def get_quick_by_id(self, quick_id):
+		command_list = [
+			[ 'PRG', 'PRG,OK' ],
+			[ 'QGL,'+quick_id+','+qgl_string, 'QGL,'+qgl_string ],
+			[ 'EPG', 'EPG,OK' ],
+			[ 'KEY,S,P', 'KEY,OK' ],
+		]
+		for command in command_list:
+			self.send_serial_command(command[0],command[1])
+		
+
 	def send_serial_command(self, command, expected):
 		print command
 		self.ser.write(command + '\r')

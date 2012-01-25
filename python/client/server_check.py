@@ -7,7 +7,7 @@ bs=Bcd396tSerial()
 statustext = bs.status_text()
 print statustext
 
-url = "https://vees.net/scanner/index.php"
+url = "https://vees.net/scanner/service2.php"
 
 request = urllib2.Request(url,
 	urllib.urlencode({"status": statustext})

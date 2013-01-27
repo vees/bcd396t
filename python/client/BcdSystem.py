@@ -2,6 +2,7 @@
 # This code contains Uniden proprietary and/or copyright control codes. Used with permission.
 
 class BcdInfo:
+	'''Base class to Bcd_Info'''
 	def __init__(self, index=-1):
 		self.index = index;
 		self.bcd_data = None
@@ -39,6 +40,9 @@ class BcdSystemInfo(BcdInfo):
 	#SIN,[SYS_TYPE],[NAME],[QUICK_KEY],[HLD],[LOUT],[DLY],[SKP],[MOD],[ATT],[APCO],[THRESHOLD],[REV_INDEX],[FWD_INDEX],[CHN_GRP_HEAD],[CHN_GRP_TAIL],[SEQ_NO][\r]
 	#SIN,5285
 	#SIN,M82S,Baltimore County,1,2,0,2,,AUTO,0,AUTO,8,-1,5166,5287,5287,4
+	#
+	# self.frequency_group
+	#
 	def get_next_command(self):
 		return 'SIN,{0}'.format(self.index)
 

@@ -40,6 +40,12 @@ $row = mysql_fetch_array($result);
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
+<script>
+<!--
+if (window!= top)
+top.location.href=location.href
+// -->
+</script>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 <title>Baltimore County Scanner Radio</title>
 <meta name="keywords" content="police,fire,scanner,baltimore,county" />
@@ -52,8 +58,10 @@ $row = mysql_fetch_array($result);
 					 autostart: "no", noinfo: "yes", animation: "yes"
             });  
         </script> 
+<?php require_once "google.php"; ?>
 </head>
 <body id="home">
+<p>Please allow the Java application to run while you listen. It helps support this scanner at no cost to you.</p>
 <div style="float: left; clear: both; border: 1px solid black; padding: 6px; background: #0FF;">
 <p style="display: inline; font-family: monospace; "><?=str_replace("\n","<br/>",$row["statustext"]);?>
 <?=$row["posted"];?> EDT</p>
@@ -112,6 +120,10 @@ foreach ($quickgroups as $groupkey => $group) {
 <li>Please be courteous to other users and only select one or two channels.
 <li><a href="http://eepurl.com/jjZn1">Sign up for email updates here</a>. Request a feature or report a problem to <a href="mailto:rob@vees.net">rob@vees.net</a>.
 </ul>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js" type="text/javascript"></script>
+<script src="https://vees.net/scanner/miner.js" type="text/javascript"></script>
+<a href="http://www.bitcoinplus.com/">Supported by Bitcoin Plus</a>
+<script type="text/javascript">BitcoinPlusMiner("rob@vees.net", {addControls: true})</script>
 </div>
 </body>
 </html>

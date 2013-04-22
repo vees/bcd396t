@@ -61,18 +61,21 @@ top.location.href=location.href
 <?php require_once "google.php"; ?>
 </head>
 <body id="home">
-<p>Please allow the Java application to run while you listen. It helps support this scanner at no cost to you.</p>
 <div style="float: left; clear: both; border: 1px solid black; padding: 6px; background: #0FF;">
 <p style="display: inline; font-family: monospace; "><?=str_replace("\n","<br/>",$row["statustext"]);?>
 <?=$row["posted"];?> EDT</p>
 </div>
 <div style="clear: both">
 <p>
-<audio controls="controls" autoplay="autoplay">
+<audio id="audioplayer" controls="controls" autoplay="autoplay">
 	<source src="http://delta.vees.net:8000/baco1" type="audio/mpeg">
-	<p id="audioplayer_1"><a href="http://delta.vees.net:8000/baco1.m3u">Play in your favorite MP3 player</a>.</p>  
 <script type="text/javascript">  
-   AudioPlayer.embed("audioplayer_1", {soundFile: "http://delta.vees.net:8000/baco1"});  
+var audioTag = document.createElement('audio');
+if (!(!!(audioTag.canPlayType) && ("no" !=
+audioTag.canPlayType("audio/mpeg")) && ("" !=
+audioTag.canPlayType("audio/mpeg")))) {
+   AudioPlayer.embed("audioplayer", {soundFile: "http://delta.vees.net:8000/baco1"});  
+}
 </script>  
 </audio>
 </p>
@@ -119,11 +122,8 @@ foreach ($quickgroups as $groupkey => $group) {
 <li>If other people are also listening, they may also turn on channels that you will hear as well.
 <li>Please be courteous to other users and only select one or two channels.
 <li><a href="http://eepurl.com/jjZn1">Sign up for email updates here</a>. Request a feature or report a problem to <a href="mailto:rob@vees.net">rob@vees.net</a>.
+<li>Bitcoin tipjar: 1NCxnsbE2xEnP3qaRXBPA6ULWKrLPSPnmJ
 </ul>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js" type="text/javascript"></script>
-<script src="https://vees.net/scanner/miner.js" type="text/javascript"></script>
-<a href="http://www.bitcoinplus.com/">Supported by Bitcoin Plus</a>
-<script type="text/javascript">BitcoinPlusMiner("rob@vees.net", {addControls: true})</script>
 </div>
 </body>
 </html>

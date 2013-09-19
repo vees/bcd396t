@@ -1,5 +1,6 @@
 <?php
-#echo "Sorry, scanner is down for routine fixes. Will return 9pm on Monday 1/14/13, Thanks for your patience.";
+#header($_SERVER['SERVER_PROTOCOL'] . ' 503 Service Unavailable', true, 503);
+#echo "<p>Sorry, scanner is down because of network issues with the computer it is attached to. Back up Monday night around 7pm.</p>";
 #exit();
 
 require_once("settings.php");
@@ -67,17 +68,24 @@ top.location.href=location.href
 </div>
 <div style="clear: both">
 <p>
-<audio id="audioplayer" controls="controls" autoplay="autoplay">
-	<source src="http://delta.vees.net:8000/baco1" type="audio/mpeg">
-<script type="text/javascript">  
-var audioTag = document.createElement('audio');
-if (!(!!(audioTag.canPlayType) && ("no" !=
-audioTag.canPlayType("audio/mpeg")) && ("" !=
-audioTag.canPlayType("audio/mpeg")))) {
-   AudioPlayer.embed("audioplayer", {soundFile: "http://delta.vees.net:8000/baco1"});  
-}
-</script>  
+<audio id="audioplayer" preload="auto" controls style="width:100%;" >
+    <source src="http://delta.vees.net:8000/baco1" type="audio/mp3">
+        Your browser doesn't support the HTML audio tag. You can still download the show, though!
 </audio>
+    <p id="audioplayer_1"></p>
+<script type="text/javascript">
+    var audioTag = document.createElement('audio');
+    /* Do we not support MP3 audio? If not, dynamically made a Flash SWF player.  */
+    if (!(!!(audioTag.canPlayType) && ("no" != audioTag.canPlayType("audio/mpeg")) && ("" != audioTag.canPlayType("audio/mpeg")))) {
+        AudioPlayer.embed("audioplayer_1", {soundFile: "http://delta.vees.net:8000/baco1", transparentpagebg: "yes"});
+        $( '#audioplayer').hide();
+    }
+    else /* Ok, we do support MP3 audio, style the audio tag into a touch-friendly player */
+    {
+        /* If we didn't do the "if mp3 supported" check above, this call would prompt Firefox install quicktime! */
+        $( '#audioplayer' ).audioPlayer(); 
+    }
+</script>
 </p>
 </div>
 <?php
@@ -122,7 +130,7 @@ foreach ($quickgroups as $groupkey => $group) {
 <li>If other people are also listening, they may also turn on channels that you will hear as well.
 <li>Please be courteous to other users and only select one or two channels.
 <li><a href="http://eepurl.com/jjZn1">Sign up for email updates here</a>. Request a feature or report a problem to <a href="mailto:rob@vees.net">rob@vees.net</a>.
-<li>Bitcoin tipjar: 1NCxnsbE2xEnP3qaRXBPA6ULWKrLPSPnmJ
+<li>Welcome Baltimore County Auxiliary Police listeners!
 </ul>
 </div>
 </body>

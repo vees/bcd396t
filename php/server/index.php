@@ -1,13 +1,17 @@
 <?php
-if (false) {
+require_once("settings.php");
+$filename=NODEPING_URL;
+$var=json_decode(file_get_contents($filename));
+$sitedown = strpos($var[0]->subject, 'Host Down') !== FALSE;
+if ($sitedown) {
 header($_SERVER['SERVER_PROTOCOL'] . ' 503 Service Unavailable', true, 503);
 ?>
-<p>Sorry, scanner is down because of network issues with the computer it is attached to. Back up Sunday night around 9pm.</p>
+<p>Sorry, scanner is down due to network issues. Back up soon.</p>
 <?php
 exit();
 }
 
-require_once("settings.php");
+
 
 $db=mysql_pconnect(DB_HOST,DB_USER,DB_PASSWORD);
 mysql_select_db(DB_NAME,$db);
@@ -105,6 +109,7 @@ function refresh()
     }
 </script>
 </p>
+<p><?php print_r($var[0]->subject); ?></p>
 </div>
 <?php
 }

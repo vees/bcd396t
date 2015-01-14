@@ -1,17 +1,13 @@
 <?php
-require_once("settings.php");
-$filename=NODEPING_URL;
-$var=json_decode(file_get_contents($filename));
-$sitedown = strpos($var[0]->subject, 'Host Down') !== FALSE;
-if ($sitedown) {
+if (false) {
 header($_SERVER['SERVER_PROTOCOL'] . ' 503 Service Unavailable', true, 503);
 ?>
-<p>Sorry, scanner is down due to network issues. Back up soon.</p>
+<p>Sorry, scanner is down because of network issues with the computer it is attached to. Back up Sunday night around 9pm.</p>
 <?php
 exit();
 }
 
-
+require_once("settings.php");
 
 $db=mysql_pconnect(DB_HOST,DB_USER,DB_PASSWORD);
 mysql_select_db(DB_NAME,$db);
@@ -49,6 +45,7 @@ $row = mysql_fetch_array($result);
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
+<link rel="stylesheet" media="all" href="scanner.css" />
 <script>
 <!--
 if (window!= top)
@@ -72,7 +69,13 @@ top.location.href=location.href
 <body id="home">
     <script src="jquery-1.11.0.js"></script>
     <script>
-$( document ).ready(function() { refresh(); $('#audioplayer').trigger('play'); } );
+$( document ).ready(
+function() {
+refresh(); 
+$('#audioplayer').trigger('play'); 
+ $("#group1").bind("click", function() { lightupchannel(); } );
+ /*$("#group1").bind("click", function() { alert("test"); } );*/
+} );
  
 // Your code here.
 function refresh()
@@ -83,9 +86,15 @@ function refresh()
 		refresh();
 	}, 60000);
 }
+
+function lightupchannel()
+{
+ 	$.get("/scanner/testfake");
+}
+
 </script>
-<div style="float: left; clear: both; border: 1px solid black; padding: 6px; background: #0FF;" id="scannerdisplay">
-<p style="display: inline; font-family: monospace; "><?=str_replace("\n","<br/>",$row["statustext"]);?>
+<div class="scannerdisplay" id="scannerdisplay">
+<p class="scannerdisplay"><?=str_replace("\n","<br/>",$row["statustext"]);?>
 <?=$row["posted"];?> EDT</p>
 </div>
 <div style="clear: both">
@@ -109,7 +118,6 @@ function refresh()
     }
 </script>
 </p>
-<p><?php print_r($var[0]->subject); ?></p>
 </div>
 <?php
 }
@@ -130,7 +138,7 @@ $quickgroups=array(
 <?php
 foreach ($quickgroups as $groupkey => $group) {
 ?>
-<tr><td><div style="width: 100%; margin: 5px; border: 2px solid; text-decoration: none;"><a href="#" style="text-decoration: none;" id="group<?=$groupkey?>"><?=$group?></a></div></td>
+<tr><td><div class="channelselector"><a href="#" style="text-decoration: none;" id="group<?=$groupkey?>"><?=$group?></a></div></td>
 <td>
 <select name="groupkey[<?=$groupkey?>]" <?php if (in_array($groupkey, array())) { print "disabled"; } ?>>
   <option value="0">--</option>

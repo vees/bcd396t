@@ -1,0 +1,223 @@
+Decimal,Subfleet,Alpha Tag,Mode,Description,Service Tag,Category
+9410,,BCSO Main,D,Main,Law Dispatch,Sheriff
+9411,,BCSO Ct Sec,D,Court Security,Law Tac,Sheriff
+9420,,BC DetCntr A,D,Detention Center A,Corrections,Sheriff
+9421,,BC DetCntr B,D,Detention Center B,Corrections,Sheriff
+9422,,BC DetCtrMnt,D,Detention Center Maintenance,Corrections,Sheriff
+9430,,BCo ElSv218S,D,Electronic Services 218S,Public Works,Local Government
+9433,,BCo ElSv222,D,Electronic Services 222,Public Works,Local Government
+9440,,BCo Sch Sec,D,Security,Security,Schools
+9441,,BCo SchTrans,D,Transportation,Schools,Schools
+9450,,BCFD Main,D,Main Dispatch,Fire Dispatch,Fire
+9451,,BCFD Central,D,Central Ops,Fire-Tac,Fire
+9452,,BCFD North,D,North Ops,Fire-Tac,Fire
+9453,,BCFD East,D,East Ops,Fire-Tac,Fire
+9454,,BCFD West,D,West Ops,Fire-Tac,Fire
+9455,,BCFD A3 ADO,D,A3 ADO,Fire-Tac,Fire
+9456,,BCFD A8 ADM,D,A8 ADM,Fire-Tac,Fire
+9457,,BCFD A4 SUP,D,A4 SUP,Fire-Tac,Fire
+9458,,BCFD A2 EMS,D,A2 EMS,Fire-Tac,Fire
+9459,,BCFD A5 DFM,D,A5 DFM,Fire-Tac,Fire
+9460,,BCFD B12,D,B12 AC 10,Fire-Tac,Fire
+9461,,BCFD B11 T11,D,B11 Tac 11,Fire-Tac,Fire
+9462,,BCFD B3 T12,D,B3 Tac 12,Fire-Tac,Fire
+9463,,BCFD B4 T13,D,B4 Tac 13,Fire-Tac,Fire
+9464,,BCFD B5 T14,D,B5 Tac 14,Fire-Tac,Fire
+9465,,BCFD B6 T15,D,B6 Tac 15,Fire-Tac,Fire
+9466,,BCFD B7 T16,D,B7 Tac 16,Fire-Tac,Fire
+9467,,BCFD B8 T17,D,B8 Tac 17,Fire-Tac,Fire
+9468,,BCFD B9 T18,D,B9 Tac 18,Fire-Tac,Fire
+9469,,BCFD B10 T19,D,B10 Tac 19,Fire-Tac,Fire
+9470,,BCFD J12,D,J12 AC 110N,Fire-Tac,Fire
+9471,,BCFD J11,D,J11 BATAC 111N,Fire-Tac,Fire
+9472,,BCFD J3,D,J3 BATAC 112N,Fire-Tac,Fire
+9473,,BCFD J4,D,J4 BATAC 113N,Fire-Tac,Fire
+9474,,BCFD J5,D,J5 BATAC 114N,Fire-Tac,Fire
+9475,,BCFD J6,D,J6 BATAC 115N,Fire-Tac,Fire
+9476,,BCFD J7,D,J7 BATAC 116N,Fire-Tac,Fire
+9477,,BCFD J8,D,J8 BATAC 117N,Fire-Tac,Fire
+9478,,BCFD J9,D,J9 BATAC 118N,Fire-Tac,Fire
+9479,,BCFD J10,D,J10 BATAC 119N,Fire-Tac,Fire
+9480,,BCFD D12,D,D12 AC 20,Fire-Tac,Fire
+9481,,BCFD D11 T21,D,D11 Tac 21,Fire-Tac,Fire
+9482,,BCFD D3 T22,D,D3 Tac 22,Fire-Tac,Fire
+9483,,BCFD D4 T23,D,D4 Tac 23,Fire-Tac,Fire
+9484,,BCFD D5 T24,D,D5 Tac 24,Fire-Tac,Fire
+9485,,BCFD D6 T25,D,D6 Tac 25,Fire-Tac,Fire
+9486,,BCFD D7 T26,D,D7 Tac 26,Fire-Tac,Fire
+9487,,BCFD D8 T27,D,D8 Tac 27,Fire-Tac,Fire
+9488,,BCFD D9 T28,D,D9 Tac 28,Fire-Tac,Fire
+9489,,BCFD D10 T29,D,D10 Tac 29,Fire-Tac,Fire
+9490,,BCFD K12,D,K12 AC 120N,Fire-Tac,Fire
+9491,,BCFD K11,D,K11 Tac 121N,Fire-Tac,Fire
+9492,,BCFD K3,D,K3 Tac 122N,Fire-Tac,Fire
+9493,,BCFD K4,D,K4 Tac 123N,Fire-Tac,Fire
+9494,,BCFD K5,D,K5 Tac 124N,Fire-Tac,Fire
+9495,,BCFD K6,D,K6 Tac 125N,Fire-Tac,Fire
+9496,,BCFD K7,D,K7 Tac 126N,Fire-Tac,Fire
+9497,,BCFD K8,D,K8 Tac 127N,Fire-Tac,Fire
+9498,,BCFD K9,D,K9 Tac 128N,Fire-Tac,Fire
+9499,,BCFD K10,D,K10 Tac 129N,Fire-Tac,Fire
+9500,,BCFD F12,D,F12 AC 30S,Fire-Tac,Fire
+9501,,BCFD F11,D,F11 Tac 31S,Fire-Tac,Fire
+9502,,BCFD F3 T32S,D,F3 Tac 32S,Fire-Tac,Fire
+9503,,BCFD F4 T33S,D,F4 Tac 33S,Fire-Tac,Fire
+9504,,BCFD F5 T34S,D,F5 Tac 34S,Fire-Tac,Fire
+9505,,BCFD F6 T35S,D,F6 Tac 35S,Fire-Tac,Fire
+9506,,BCFD F7 T36S,D,F7 Tac 36S,Fire-Tac,Fire
+9507,,BCFD F8 T37S,D,F8 Tac 37S,Fire-Tac,Fire
+9508,,BCFD F9 T38S,D,F9 Tac 38S,Fire-Tac,Fire
+9509,,BCFD F10,D,F10 Tac 39S,Fire-Tac,Fire
+9510,,BCFD G12,D,G12 AC 40S,Fire-Tac,Fire
+9511,,BCFD G11,D,G11 Tac 41S,Fire-Tac,Fire
+9512,,BCFD G3 T42S,D,G3 Tac 42S,Fire-Tac,Fire
+9513,,BCFD G4 T43S,D,G4 Tac 43S,Fire-Tac,Fire
+9514,,BCFD G5 T44S,D,G5 Tac 44S,Fire-Tac,Fire
+9515,,BCFD G6 T45S,D,G6 Tac 45S,Fire-Tac,Fire
+9516,,BCFD G7 T46S,D,G7 Tac 46S,Fire-Tac,Fire
+9517,,BCFD G8 T47S,D,G8 Tac 47S,Fire-Tac,Fire
+9518,,BCFD G9 T48S,D,G9 Tac 48S,Fire-Tac,Fire
+9519,,BCFD G10,D,G10 Tac 49S,Fire-Tac,Fire
+9520,,BCFD E12,D,E12 AC 50,Fire-Tac,Fire
+9521,,BCFD E11 T51,D,E11 Tac 51,Fire-Tac,Fire
+9522,,BCFD E3 T52,D,E3 Tac 52,Fire-Tac,Fire
+9523,,BCFD E4 T53,D,E4 Tac 53,Fire-Tac,Fire
+9524,,BCFD E5 T54,D,E5 Tac 54,Fire-Tac,Fire
+9525,,BCFD E6 T55,D,E6 Tac 55,Fire-Tac,Fire
+9526,,BCFD E7 T56,D,E7 Tac 56,Fire-Tac,Fire
+9527,,BCFD E8 T57,D,E8 Tac 57,Fire-Tac,Fire
+9528,,BCFD E9 T58,D,E9 Tac 58,Fire-Tac,Fire
+9529,,BCFD E10 T59,D,E10 Tac 59,Fire-Tac,Fire
+9530,,BCFD C12,D,C12 AC 60,Fire-Tac,Fire
+9531,,BCFD C11 T61,D,C11 Tac 61,Fire-Tac,Fire
+9532,,BCFD C3 T62,D,C3 Tac 62,Fire-Tac,Fire
+9533,,BCFD C4 T63,D,C4 Tac 63,Fire-Tac,Fire
+9534,,BCFD C5 T64,D,C5 Tac 64,Fire-Tac,Fire
+9535,,BCFD C6 T65,D,C6 Tac 65,Fire-Tac,Fire
+9536,,BCFD C7 T66,D,C7 Tac 66,Fire-Tac,Fire
+9537,,BCFD C8 T67,D,C8 Tac 67,Fire-Tac,Fire
+9538,,BCFD C9 T68,D,C9 Tac 68,Fire-Tac,Fire
+9539,,BCFD C10 T69,D,C10 Tac 69,Fire-Tac,Fire
+9540,,BCFD H12,D,H12 AC 70,Fire-Tac,Fire
+9541,,BCFD H11 T71,D,H11 Tac 71,Fire-Tac,Fire
+9542,,BCFD H3 T72,D,H3 Tac 72,Fire-Tac,Fire
+9543,,BCFD H4 T73,D,H4 Tac 73,Fire-Tac,Fire
+9544,,BCFD H5 T74,D,H5 Tac 74,Fire-Tac,Fire
+9545,,BCFD H6 T75,D,H6 Tac 75,Fire-Tac,Fire
+9546,,BCFD H7 T76,D,H7 Tac 76,Fire-Tac,Fire
+9547,,BCFD H8 T77,D,H8 Tac 77,Fire-Tac,Fire
+9548,,BCFD H9 T78,D,H9 Tac 78,Fire-Tac,Fire
+9549,,BCFD H10 T79,D,H10 Tac 79,Fire-Tac,Fire
+9550,,BCFD I12,D,I12 AC 80,Fire-Tac,Fire
+9551,,BCFD I11 T81,D,I11 Tac 81,Fire-Tac,Fire
+9552,,BCFD I3 T82,D,I3 Tac 82,Fire-Tac,Fire
+9553,,BCFD I4 T83,D,I4 Tac 83,Fire-Tac,Fire
+9554,,BCFD I5 T84,D,I5 Tac 84,Fire-Tac,Fire
+9555,,BCFD I6 T85,D,I6 Tac 85,Fire-Tac,Fire
+9556,,BCFD I7 T86,D,I7 Tac 86,Fire-Tac,Fire
+9557,,BCFD I8 T87,D,I8 Tac 87,Fire-Tac,Fire
+9558,,BCFD I9 T88,D,I9 Tac 88,Fire-Tac,Fire
+9559,,BCFD I10 T89,D,I10 Tac 89,Fire-Tac,Fire
+9560,,BCFD Trng 1,D,Training 1,Fire-Tac,Fire
+9561,,BCFD Trng 2S,D,Training 2S,Fire-Tac,Fire
+9562,,BCFD Trng 3S,D,Training 3S,Fire-Tac,Fire
+9563,,BCFD Trng 4N,D,Training 4N,Fire-Tac,Fire
+9564,,BCFD ACAD,D,ACAD,Fire-Tac,Fire
+9566,,BCFD PF97,D,PF97,Fire-Tac,Fire
+9567,,BCFD PF98,D,PF98,Fire-Tac,Fire
+9568,,BCFD PF99,D,PF99,Fire-Tac,Fire
+9569,,BCFD M1 191,D,M1 191,Fire-Tac,Fire
+9570,,BCFD M2 192,D,M2 192,Fire-Tac,Fire
+9571,,BCFD M3 193,D,M3 193,Fire-Tac,Fire
+9572,,BCFD M4 194,D,M4 194,Fire-Tac,Fire
+9573,,BCFD M5 195,D,M5 195,Fire-Tac,Fire
+9574,,BCFD M6 196,D,M6 196,Fire-Tac,Fire
+9575,,BCFD M7 197,D,M7 197,Fire-Tac,Fire
+9576,,BCFD M8 198,D,M8 198,Fire-Tac,Fire
+9577,,BCFD VOL,D,VOL,Fire-Tac,Fire
+9578,,BCFD FID,D,FID,Fire-Tac,Fire
+9579,,EMRC Call221,D,EMRC Call 221,Hospital,Fire
+9580,,EMRC 224,D,EMRC 224,Hospital,Fire
+9581,,EMRC 228,D,EMRC 228,Hospital,Fire
+9582,,BCo OEM 1,D,Office of Emergency Management 1,Emergency Ops,Local Government
+9583,,BCo OEM 2,D,Office of Emergency Management 2,Emergency Ops,Local Government
+9600,,BCPD WilkOps,D,Wilkens Ops,Law Dispatch,Police
+9601,,BCPD WoodOps,D,Woodlawn Ops,Law Dispatch,Police
+9602,,BCPD FrnkOps,D,Franklin Ops,Law Dispatch,Police
+9603,,BCPD PikeOps,D,Pikesville Ops,Law Dispatch,Police
+9604,,BCPD TowOps,D,Towson Ops,Law Dispatch,Police
+9605,,BCPD CocOps,D,Cockeysville Ops,Law Dispatch,Police
+9606,,BCPD PrkvOps,D,Parkville Ops,Law Dispatch,Police
+9607,,BCPD WhitOps,D,White Marsh Ops,Law Dispatch,Police
+9608,,BCPD EssxOps,D,Essex Ops,Law Dispatch,Police
+9609,,BCPD NrthOps,D,Northpoint Ops,Law Dispatch,Police
+9612,,BCPD CID 1,D,Criminal Investigations Division 1,Law Tac,Police
+9613,,BCPD CID 2,E,Criminal Investigations Division 2,Law Tac,Police
+9617,,BCPD Intel,E,Intelligence,Law Tac,Police
+9618,,BCPD Traing,D,Training,Law Tac,Police
+9619,,BCPD AcadTrn,D,Academy  Training,Law Tac,Police
+9622,,BCPD CIDSWAT,D,Criminal Investigations Division  SWATWarrants,Law Tac,Police
+9624,,BCPD RATT,D,Regional Auto Theft Taskforce RATT,Law Tac,Police
+9629,,BCPD CIDNarc,D,Criminal Investigations Division  Narcotics,Law Tac,Police
+9634,,BCPD WilkTac,D,Wilkens Tac,Law Tac,Police
+9635,,BCPD WoodTac,D,Woodlawn Tac,Law Tac,Police
+9636,,BCPD FrnkTac,D,Franklin Tac,Law Tac,Police
+9637,,BCPD PikeTac,D,Pikesville Tac,Law Tac,Police
+9638,,BCPD TowTac,D,Towson Tac,Law Tac,Police
+9639,,BCPD CocTac,D,Cockeysville Tac,Law Tac,Police
+9640,,BCPD CocTacN,D,Cockeysville Tac North,Law Tac,Police
+9641,,BCPD PrkvTac,D,Parkville Tac,Law Tac,Police
+9642,,BCPD WhitTac,D,White Marsh Tac,Law Tac,Police
+9643,,BCPD EssxTac,D,Essex Tac,Law Tac,Police
+9644,,BCPD NrthTac,D,Northpoint Tac,Law Tac,Police
+9650,,BCPD SWATEnc,E,SWAT Encrypted,Law Tac,Police
+9651,,BCPD HNT,D,Hostage Negotiation Team,Law Tac,Police
+9652,,BCPD WilkISU,D,Wilkens ISU 301,Law Tac,Police
+9653,,BCPD WoodISU,D,Woodlawn ISU 302,Law Tac,Police
+9654,,BCPD FrnkISU,D,Franklin ISU 303,Law Tac,Police
+9655,,BCPD PikeISU,D,Pikesville ISU 304,Law Tac,Police
+9656,,BCPD TowISU,D,Towson ISU 306,Law Tac,Police
+9657,,BCPD CocISU,D,Cockeysville ISU 307,Law Tac,Police
+9658,,BCPD CocISUN,D,Cockeysville ISU North,Law Tac,Police
+9659,,BCPD PrkvISU,D,Parkville ISU 308,Law Tac,Police
+9660,,BCPD WhitISU,D,Whitemarsh ISU 309,Law Tac,Police
+9661,,BCPD EssxISU,D,Essex ISU 311,Law Tac,Police
+9662,,BCPD NrthISU,D,Northpoint ISU 312,Law Tac,Police
+9665,,BCPD WilkEvt,D,Wilkens Event,Law Tac,Police
+9666,,BCPD WoodEvt,D,Woodlawn Event,Law Tac,Police
+9667,,BCPD FrnkEvt,D,Franklin Event,Law Tac,Police
+9668,,BCPD PikeEvt,D,Pikesville Event,Law Tac,Police
+9669,,BCPD TowEvt,D,Towson Event,Law Tac,Police
+9670,,BCPD CocEvt,D,Cockeysville Event,Law Tac,Police
+9671,,BCPD CocEvtN,D,Cockeysville Event North,Law Tac,Police
+9672,,BCPD PrkvEvt,D,Parkville Event,Law Tac,Police
+9673,,BCPD WhitEvt,D,White Marsh Event,Law Tac,Police
+9674,,BCPD EssxEvt,D,Essex Event,Law Tac,Police
+9675,,BCPD NrthEvt,D,Northpoint Event,Law Tac,Police
+9683,,BCo Hghwy12,D,Highways 12,Public Works,Local Government
+9691,,BCo HghwySpv,D,Highways  Supervisors,Public Works,Local Government
+9692,,BCo Hwy 9692,D,Highways,Public Works,Local Government
+9695,,BCo UtilSupv,D,Utilities  Supervisors,Public Works,Local Government
+9698,,BCo WastSupv,D,Solid Waste  Supervisors,Public Works,Local Government
+9700,,BCo UtilSafe,D,Utilities  Safety,Public Works,Local Government
+9701,,BCo CountRid,D,Countyride,Transportation,Local Government
+9707,,BCo BldgSupv,D,Building Maintenance Supervisors,Public Works,Local Government
+9708,,BCo AnimCntl,D,Animal Control,Public Works,Local Government
+9710,,BCo RecParks,D,Recreation and Parks,Public Works,Local Government
+9712,,BCo Bd Elect,D,Board of Elections,Public Works,Local Government
+9850,,BCo V1 Coop,D,V1 County Coop,Interop,Local Government
+9851,,BCo V2 Ev2,D,V2 Event 2,Interop,Local Government
+9852,,BCo V3 Ev3,D,V3 Event 3,Interop,Local Government
+9853,,BCo V4 Ev4,D,V4 Event 4,Interop,Local Government
+9854,,BCo V5 Ev5,D,V5 Event 5,Interop,Local Government
+9855,,BCo V6 Ev6,D,V6 Event 6,Interop,Local Government
+9856,,BCo V7 Ev7,D,V7 Event 7,Interop,Local Government
+9857,,BCo V8 Ev8,D,V8 Event 8,Interop,Local Government
+9858,,BCo V9 Ev9,D,V9 Event 9,Interop,Local Government
+9859,,BCo V10 Ev10,D,V10 Event 10,Interop,Local Government
+9860,,BCo V11 Ev11,D,V11 Event 11,Interop,Local Government
+9861,,BCo V12 Ev12,D,V12 Event 12,Interop,Local Government
+9862,,BCo V13 Ev13,D,V13 Event 13,Interop,Local Government
+9863,,BCo V14 Ev14,D,V14 Event 14,Interop,Local Government
+9864,,BCo V15 E15N,D,V15 Event15N,Interop,Local Government
+9865,,BCo V16 E16N,D,V16 Event16N,Interop,Local Government

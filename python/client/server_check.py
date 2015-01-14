@@ -34,9 +34,13 @@ for proc in psutil.process_iter():
 		out = []
 		for conn in proc.get_connections():
 			if len(conn.remote_address) > 0:
-				out.append(conn.remote_address[0])
+				out.append(conn.remote_address[0].replace('::ffff:',''))
+
+print "Found remote"
 
 iplist = ",".join(f7(out))
+
+print iplist
 
 url = "https://vees.net/scanner/service2.php"
 
@@ -45,7 +49,10 @@ request = urllib2.Request(url,
 )
 reply = urllib2.urlopen(request)
 
+print "Got reply"
+
 quickset = reply.read(10)
+#quickset = '2222122220'
 if (last_quickset != None and last_quickset!= quickset):
 	bs.set_quick_by_id('1033',quickset)
 	print "Changed value"

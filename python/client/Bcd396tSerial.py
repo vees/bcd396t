@@ -7,12 +7,13 @@ class Bcd396tSerial:
 		self.open_serial()
 
 	def open_serial(self):
-		self.ser=serial.Serial('/dev/ttyUSB0',115200, rtscts=0)
-		self.ser.open()
+		self.ser=serial.Serial('/dev/ttyUSB1',115200, rtscts=0)
+		if (self.ser.isOpen() == False):
+			self.ser.open()
 		
 		# We just started, so clear out the buffer
 		if (self.ser.inWaiting()):
-			self.ser.read(ser.inWaiting())
+			self.ser.read(self.ser.inWaiting())
 
 	def close_serial(self):
 		print "Cleaning up to end"

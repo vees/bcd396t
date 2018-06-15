@@ -1,24 +1,23 @@
-December 5, 2011
+# December 5, 2011
 
 Followed instructions in github setup to create initial repo including for this instruction manual.
 
-rob@wrath:~/bcd396t$ git init
-Initialized empty Git repository in /home/rob/bcd396t/.git/
-rob@wrath:~/bcd396t$   touch README
-rob@wrath:~/bcd396t$   git add README
-rob@wrath:~/bcd396t$   git commit -m 'first commit'
-[master (root-commit) 7c1bbee] first commit
- 0 files changed, 0 insertions(+), 0 deletions(-)
- create mode 100644 README
-rob@wrath:~/bcd396t$   git remote add origin git@github.com:vees/bcd396t.git
-rob@wrath:~/bcd396t$   git push -u origin master
-Counting objects: 3, done.
-Writing objects: 100% (3/3), 204 bytes, done.
-Total 3 (delta 0), reused 0 (delta 0)
-To git@github.com:vees/bcd396t.git
- * [new branch]      master -> master
-Branch master set up to track remote branch master from origin.
-
+    rob@wrath:~/bcd396t$ git init
+    Initialized empty Git repository in /home/rob/bcd396t/.git/
+    rob@wrath:~/bcd396t$   touch README
+    rob@wrath:~/bcd396t$   git add README
+    rob@wrath:~/bcd396t$   git commit -m 'first commit'
+    [master (root-commit) 7c1bbee] first commit
+     0 files changed, 0 insertions(+), 0 deletions(-)
+     create mode 100644 README
+    rob@wrath:~/bcd396t$   git remote add origin git@github.com:vees/bcd396t.git
+    rob@wrath:~/bcd396t$   git push -u origin master
+    Counting objects: 3, done.
+    Writing objects: 100% (3/3), 204 bytes, done.
+    Total 3 (delta 0), reused 0 (delta 0)
+    To git@github.com:vees/bcd396t.git
+     * [new branch]      master -> master
+    Branch master set up to track remote branch master from origin.
 
 First step is to acquire more information about any other applications, libraries, API, or control code that might already do what I want.
 
@@ -30,8 +29,6 @@ http://hamlib.sourceforge.net/sup-info/support/model810.txt
 
 Overall backend warnings: 0
 
-
-
 Found the following code in hamlib repository:
 
 http://hamlib.git.sourceforge.net/git/gitweb.cgi?p=hamlib/hamlib;a=blob;f=uniden/uniden_digital.c;h=e42939f7efb49e2a79b8a30e34a3899a000d604b;hb=HEAD
@@ -42,97 +39,90 @@ http://forums.radioreference.com/scanner-programming-software/39530-new-radios-o
 
 http://forums.radioreference.com/uniden-scanners/162214-bcd996xt-software-rs232-control-protocols.html
 
-
-
 Got minicom working on /dev/ttyUSB0 and sent a few commands:
 
-STS,011000,                ,,Baltimore County,,N     ID SCA ï¿½  ,, 859.9625       ,,S0:1*****-*--   ,,GRP1*****78*-   ,,1,1,0,0
-STS,011000,          ï¿½ï¿½    ,,Baltimore County,,  ID SCAN    ï¿½  ,, 859.9625       ,,S0:1*****-*--   ,,GRP1*****78*-   ,,1,1,0,0
-STS,011000,                ,,Baltimore County,,D SCAN     I ï¿½  ,, 859.9625       ,,S0:-*****-*--   ,,GRP1*****78*-   ,,1,1,0,0
-STS,011000,                ,,Fire Dispatch   ,,Western Fire 4  ,, 858.9625       ,,S0:-*****-*--   ,,GRP1*****-8*-   ,,1,1,0,0
-GID,,,,,,
-
+    STS,011000,                ,,Baltimore County,,N     ID SCA ï¿½  ,, 859.9625       ,,S0:1*****-*--   ,,GRP1*****78*-   ,,1,1,0,0
+    STS,011000,          ï¿½ï¿½    ,,Baltimore County,,  ID SCAN    ï¿½  ,, 859.9625       ,,S0:1*****-*--   ,,GRP1*****78*-   ,,1,1,0,0
+    STS,011000,                ,,Baltimore County,,D SCAN     I ï¿½  ,, 859.9625       ,,S0:-*****-*--   ,,GRP1*****78*-   ,,1,1,0,0
+    STS,011000,                ,,Fire Dispatch   ,,Western Fire 4  ,, 858.9625       ,,S0:-*****-*--   ,,GRP1*****-8*-   ,,1,1,0,0
+    GID,,,,,,
 
 Using manual file downloaded from:
 
 http://www.scannerdesk.com/joomla/files/uniden/396T/BCD396T_Protocol.pdf
 
-
-December 6, 2011
+# December 6, 2011
 
 Found pyserial:
 
 http://pyserial.sourceforge.net/pyserial_api.html
 
-rob@diligence:~$ python -i serinit.py
->>> ser
-Serial<id=0xb787d8ec, open=True>(port='/dev/ttyUSB0', baudrate=115200, bytesize=8, parity='N', stopbits=1, timeout=None, xonxoff=0, rtscts=0, dsrdtr=0)
->>> ser.isWaiting()
-Traceback (most recent call last):
-  File "<stdin>", line 1, in <module>
-AttributeError: 'Serial' object has no attribute 'isWaiting'
->>> ser.inWaiting()
-0
->>> ser.write("STS\n\r")
->>> ser
-Serial<id=0xb787d8ec, open=True>(port='/dev/ttyUSB0', baudrate=115200, bytesize=8, parity='N', stopbits=1, timeout=None, xonxoff=0, rtscts=0, dsrdtr=0)
->>> ser.inWaiting()
-4
->>> ser.read(4)
-'ERR\r'
->>> ser.write("STS\r")
->>> ser.inWaiting()
-127
->>> ser.read(127)
-'STS,011000,          \xac\xad    ,,Baltimore County,,SCAN     ID  \x82  ,, 860.9625       ,,S0:-*****-*--   ,,GRP1*****78*-   ,,1,1,0,0\r'
->>> ser.inWaiting()
-0
->>> ser.write("STS\r")
->>> ser.read(ser.inWaiting())
-'STS,011000,          \xac\xad    ,,Baltimore County,,Eastern Fire 3  ,, 858.9625       ,,S0:1*****-*--   ,,GRP1*****78*-   ,,1,0,0,0\r'
->>> ser.write("STS\r")
->>> ser.read(ser.inWaiting())
-'STS,011000,          \xac\xad    ,,Baltimore County,,Central Fire 2  ,, 858.2125       ,,S0:-*****-*--   ,,GRP1*****-8*-   ,,1,0,0,0\r'
->>> ser.write("GLG\r")
->>> ser.read(ser.inWaiting())
-'GLG,80,NFM,0,0,Baltimore County,Fire Dispatch,Eastern Fire 3,1,0\r'
->>> 
-
-
+    rob@diligence:~$ python -i serinit.py
+    >>> ser
+    Serial<id=0xb787d8ec, open=True>(port='/dev/ttyUSB0', baudrate=115200, bytesize=8, parity='N', stopbits=1, timeout=None, xonxoff=0, rtscts=0, dsrdtr=0)
+    >>> ser.isWaiting()
+    Traceback (most recent call last):
+      File "<stdin>", line 1, in <module>
+    AttributeError: 'Serial' object has no attribute 'isWaiting'
+    >>> ser.inWaiting()
+    0
+    >>> ser.write("STS\n\r")
+    >>> ser
+    Serial<id=0xb787d8ec, open=True>(port='/dev/ttyUSB0', baudrate=115200, bytesize=8, parity='N', stopbits=1, timeout=None, xonxoff=0, rtscts=0, dsrdtr=0)
+    >>> ser.inWaiting()
+    4
+    >>> ser.read(4)
+    'ERR\r'
+    >>> ser.write("STS\r")
+    >>> ser.inWaiting()
+    127
+    >>> ser.read(127)
+    'STS,011000,          \xac\xad    ,,Baltimore County,,SCAN     ID  \x82  ,, 860.9625       ,,S0:-*****-*--   ,,GRP1*****78*-   ,,1,1,0,0\r'
+    >>> ser.inWaiting()
+    0
+    >>> ser.write("STS\r")
+    >>> ser.read(ser.inWaiting())
+    'STS,011000,          \xac\xad    ,,Baltimore County,,Eastern Fire 3  ,, 858.9625       ,,S0:1*****-*--   ,,GRP1*****78*-   ,,1,0,0,0\r'
+    >>> ser.write("STS\r")
+    >>> ser.read(ser.inWaiting())
+    'STS,011000,          \xac\xad    ,,Baltimore County,,Central Fire 2  ,, 858.2125       ,,S0:-*****-*--   ,,GRP1*****-8*-   ,,1,0,0,0\r'
+    >>> ser.write("GLG\r")
+    >>> ser.read(ser.inWaiting())
+    'GLG,80,NFM,0,0,Baltimore County,Fire Dispatch,Eastern Fire 3,1,0\r'
+    >>>
 
 Channel list activate/deactivate:
 
-PRG                                                                                              
-PRG,OK                                                                                           
-QSL
-QSL,1222220200,0000000000,0000000000,0000000000,0000000000,0000000000,0000000000,0000000000,0000000000,0000000000
-QGL,1
-QGL,ERR
-SIH
-SIH,5285
-QSL,PAGE0
-QSL,ERR
-QSL,0
-QSL,ERR
-QSL
-QSL,1222220200,0000000000,0000000000,0000000000,0000000000,0000000000,0000000000,0000000000,0000000000,0000000000
-SIN,5285
-SIN,M82S,Baltimore County,1,2,0,2,,AUTO,0,AUTO,8,-1,5166,5287,5287,4
-QSL,5285
-QSL,ERR
-QGL,5285
-QGL,1122221120
-QGL,5285,1222221220
-QGL,OK
-EPG
-EPG,OK
-KEY,S,P
-KEY,OK
-SYS
-ERR
-STS
-STS,011000,          ï¿½ï¿½    ,,Baltimore County,,Eastern Fire 3  ,, 860.4625       ,,S0:1*****-*--   ,,GRP1*****7**-   ,,1,0,0,0
-
+    PRG
+    PRG,OK
+    QSL
+    QSL,1222220200,0000000000,0000000000,0000000000,0000000000,0000000000,0000000000,0000000000,0000000000,0000000000
+    QGL,1
+    QGL,ERR
+    SIH
+    SIH,5285
+    QSL,PAGE0
+    QSL,ERR
+    QSL,0
+    QSL,ERR
+    QSL
+    QSL,1222220200,0000000000,0000000000,0000000000,0000000000,0000000000,0000000000,0000000000,0000000000,0000000000
+    SIN,5285
+    SIN,M82S,Baltimore County,1,2,0,2,,AUTO,0,AUTO,8,-1,5166,5287,5287,4
+    QSL,5285
+    QSL,ERR
+    QGL,5285
+    QGL,1122221120
+    QGL,5285,1222221220
+    QGL,OK
+    EPG
+    EPG,OK
+    KEY,S,P
+    KEY,OK
+    SYS
+    ERR
+    STS
+    STS,011000,          ï¿½ï¿½    ,,Baltimore County,,Eastern Fire 3  ,, 860.4625       ,,S0:1*****-*--   ,,GRP1*****7**-   ,,1,0,0,0
 
 
 Ben suggested using shared queues for the client and server to exchange information about which quick groups to activate instead of exposing a secured API to the public.
@@ -157,14 +147,14 @@ A good exercise will be to run this client/server setup using the quick groups i
 
 Send to server:
 
-PRG
-PRG,OK
-QGL,5285
-QGL,1122221120
-EPG
-EPG,OK
-KEY,S,P
-KEY,OK
+    PRG
+    PRG,OK
+    QGL,5285
+    QGL,1122221120
+    EPG
+    EPG,OK
+    KEY,S,P
+    KEY,OK
 
 We always want to return to scanning at the end of a program transaction.
 
@@ -178,16 +168,16 @@ Client compares 1111111110 to 1122221120
 
 Client sees a difference, calls:
 
-PRG
-PRG,OK
-QGL,5285,1111111110
-QGL,OK
-QGL,5285
-QGL,1111111110
-EPG
-EPG,OK
-KEY,S,P
-KEY,OK
+    PRG
+    PRG,OK
+    QGL,5285,1111111110
+    QGL,OK
+    QGL,5285
+    QGL,1111111110
+    EPG
+    EPG,OK
+    KEY,S,P
+    KEY,OK
 
 Client sends: 1111111110 (confirmation)
 Client saves: 1111111110
@@ -203,445 +193,449 @@ Assuming this happens only when the server has decided that enough has changed, 
 
 The only thing the radio and the server need to share are the QGL's ID of 5285.
 
-December 7, 2011
+# December 7, 2011
 
-[singapore]$ sqlite3 bcd396t.db
-SQLite version 3.7.3
-Enter ".help" for instructions
-Enter SQL statements terminated with a ";"
-sqlite> create table quicklist(quickgroup int unique, requested datetime);
-sqlite> select * from quicklist;
-sqlite> insert into quicklist values (1,'2011-12-7 22:32');
-sqlite> insert into quicklist values (2,'2011-12-7 22:32');
-sqlite> insert into quicklist values (3,'2011-12-7 22:32');
-sqlite> insert into quicklist values (4,'2011-12-7 22:32');
-sqlite> insert into quicklist values (5,'2011-12-7 22:32');
-sqlite> insert into quicklist values (6,'2011-12-7 22:32');
-sqlite> insert into quicklist values (7,'2011-12-7 22:32');
-sqlite> insert into quicklist values (8,'2011-12-7 22:32');
-sqlite> insert into quicklist values (9,'2011-12-7 22:32');
-sqlite> select * from quicklist;
-1|2011-12-7 22:32
-2|2011-12-7 22:32
-3|2011-12-7 22:32
-4|2011-12-7 22:32
-5|2011-12-7 22:32
-6|2011-12-7 22:32
-7|2011-12-7 22:32
-8|2011-12-7 22:32
-9|2011-12-7 22:32
-sqlite> 
+    [singapore]$ sqlite3 bcd396t.db
+    SQLite version 3.7.3
+    Enter ".help" for instructions
+    Enter SQL statements terminated with a ";"
+    sqlite> create table quicklist(quickgroup int unique, requested datetime);
+    sqlite> select * from quicklist;
+    sqlite> insert into quicklist values (1,'2011-12-7 22:32');
+    sqlite> insert into quicklist values (2,'2011-12-7 22:32');
+    sqlite> insert into quicklist values (3,'2011-12-7 22:32');
+    sqlite> insert into quicklist values (4,'2011-12-7 22:32');
+    sqlite> insert into quicklist values (5,'2011-12-7 22:32');
+    sqlite> insert into quicklist values (6,'2011-12-7 22:32');
+    sqlite> insert into quicklist values (7,'2011-12-7 22:32');
+    sqlite> insert into quicklist values (8,'2011-12-7 22:32');
+    sqlite> insert into quicklist values (9,'2011-12-7 22:32');
+    sqlite> select * from quicklist;
+    1|2011-12-7 22:32
+    2|2011-12-7 22:32
+    3|2011-12-7 22:32
+    4|2011-12-7 22:32
+    5|2011-12-7 22:32
+    6|2011-12-7 22:32
+    7|2011-12-7 22:32
+    8|2011-12-7 22:32
+    9|2011-12-7 22:32
+    sqlite>
 
-sqlite> create table display(linenumber int unique, linetext varchar(512));
-sqlite> insert into display values (1,'');
+    sqlite> create table display(linenumber int unique, linetext varchar(512));
+    sqlite> insert into display values (1,'');
 
-create table quicklist(quickgroup int unique, requested datetime);
-select * from quicklist;
-insert into quicklist values (1,'2011-12-7 22:32');
-insert into quicklist values (2,'2011-12-7 22:32');
-insert into quicklist values (3,'2011-12-7 22:32');
-insert into quicklist values (4,'2011-12-7 22:32');
-insert into quicklist values (5,'2011-12-7 22:32');
-insert into quicklist values (6,'2011-12-7 22:32');
-insert into quicklist values (7,'2011-12-7 22:32');
-insert into quicklist values (8,'2011-12-7 22:32');
-insert into quicklist values (9,'2011-12-7 22:32');
+    create table quicklist(quickgroup int unique, requested datetime);
+    select * from quicklist;
+    insert into quicklist values (1,'2011-12-7 22:32');
+    insert into quicklist values (2,'2011-12-7 22:32');
+    insert into quicklist values (3,'2011-12-7 22:32');
+    insert into quicklist values (4,'2011-12-7 22:32');
+    insert into quicklist values (5,'2011-12-7 22:32');
+    insert into quicklist values (6,'2011-12-7 22:32');
+    insert into quicklist values (7,'2011-12-7 22:32');
+    insert into quicklist values (8,'2011-12-7 22:32');
+    insert into quicklist values (9,'2011-12-7 22:32');
 
-[singapore]$ ls
-bcd396t.sqlite	index.php
-[singapore]$ git remote add origin git@github.com:vees/bcd396t.git/server
+    [singapore]$ ls
+    bcd396t.sqlite	index.php
+    [singapore]$ git remote add origin git@github.com:vees/bcd396t.git/server
 
-qlite> create table display (posted datetime primary key asc, statustext varchar(512))
-   ...> ;
+    qlite> create table display (posted datetime primary key asc, statustext varchar(512))
+       ...> ;
 
-create table votes(quickgroup int, vote int, posted datetime, ipaddr varchar(16));
+    create table votes(quickgroup int, vote int, posted datetime, ipaddr varchar(16));
 
-select quickgroup,vote,count(vote) from votes group by quickgroup,vote order by quickgroup,vote;
+    select quickgroup,vote,count(vote) from votes group by quickgroup,vote order by quickgroup,vote;
 
-January 25, 2012
+# January 25, 2012
 
 Simple procedure on dumping channel list to an object
 
-SIN,5285
-SIN,M82S,Baltimore County,1,2,0,2,,AUTO,0,AUTO,8,-1,5166,5287,5287,4
-GIN,5287
-GIN,ERR
-GIN,5287
-GIN,C,System Frequency,.,0,-1,-1,5285,5289,5292,1
-TFQ,5289
-TFQ,08579625,,0,-1,5290,5285,5287
-TFQ,5290
-TFQ,08589625,,0,5289,5291,5285,5287
-TFQ,5291
-TFQ,08599625,,0,5290,5292,5285,5287
-TFQ,5292
-TFQ,08609625,,0,5291,-1,5285,5287
-TRN,5285
-TRN,0,0,1,,1,1,7,0,16,00000000,,,,,,,,,,0,5293,5857,5288,5288
-GIN,5293
-GIN,T,Parkville,1,0,-1,5297,5285,5294,5296,1
-GIN,5297
-GIN,T,Towson,2,0,5293,5301,5285,5298,5300,2
-GIN,5301
-GIN,T,White Marsh,3,0,5297,5305,5285,5302,5304,3
-GIN,5305
-GIN,T,Cockeysville,4,0,5301,5309,5285,5306,5308,4
-GIN,5309
-GIN,T,Police General,5,0,5305,5329,5285,5310,5328,5
-GIN,5329
-GIN,T,Police Special,6,0,5309,5348,5285,5330,5347,6
-GIN,5348
-GIN,T,Fire Dispatch,7,0,5329,5353,5285,5349,5352,7
-GIN,5353
-GIN,T,Firegrounds,8,0,5348,5399,5285,5354,5398,8
-GIN,5399
-GIN,T,Fire Special,9,0,5353,5857,5285,5400,5458,9
-GIN,5857
-GIN,T,Qck Save Grp,.,0,5399,-1,5285,5858,5858,10
-CIN,5294
-CIN,ERR
-TIN,5294
-TIN,Dispatch 08,1840,0,0,0,0,-1,5295,5285,5293
-TIN,5295
-TIN,Tactical 08,2288,0,0,0,0,5294,5296,5285,5293
-TIN,5296
-TIN,ISU 08,7728,0,0,0,0,5295,-1,5285,5293
-MEM
-MEM,5
-TIN,5295
-TIN,Tactical 08,2288,0,0,0,0,5294,5296,5285,5293
-GIN,5293
-GIN,T,Parkville,1,0,-1,5297,5285,5294,5296,1
-LOI,5285,5293
-LOI,OK
-GIN,5293
-GIN,T,Parkville,1,0,-1,5297,5285,5294,5296,1
-QGL,5285
-QGL,2222221110
+    SIN,5285
+    SIN,M82S,Baltimore County,1,2,0,2,,AUTO,0,AUTO,8,-1,5166,5287,5287,4
+    GIN,5287
+    GIN,ERR
+    GIN,5287
+    GIN,C,System Frequency,.,0,-1,-1,5285,5289,5292,1
+    TFQ,5289
+    TFQ,08579625,,0,-1,5290,5285,5287
+    TFQ,5290
+    TFQ,08589625,,0,5289,5291,5285,5287
+    TFQ,5291
+    TFQ,08599625,,0,5290,5292,5285,5287
+    TFQ,5292
+    TFQ,08609625,,0,5291,-1,5285,5287
+    TRN,5285
+    TRN,0,0,1,,1,1,7,0,16,00000000,,,,,,,,,,0,5293,5857,5288,5288
+    GIN,5293
+    GIN,T,Parkville,1,0,-1,5297,5285,5294,5296,1
+    GIN,5297
+    GIN,T,Towson,2,0,5293,5301,5285,5298,5300,2
+    GIN,5301
+    GIN,T,White Marsh,3,0,5297,5305,5285,5302,5304,3
+    GIN,5305
+    GIN,T,Cockeysville,4,0,5301,5309,5285,5306,5308,4
+    GIN,5309
+    GIN,T,Police General,5,0,5305,5329,5285,5310,5328,5
+    GIN,5329
+    GIN,T,Police Special,6,0,5309,5348,5285,5330,5347,6
+    GIN,5348
+    GIN,T,Fire Dispatch,7,0,5329,5353,5285,5349,5352,7
+    GIN,5353
+    GIN,T,Firegrounds,8,0,5348,5399,5285,5354,5398,8
+    GIN,5399
+    GIN,T,Fire Special,9,0,5353,5857,5285,5400,5458,9
+    GIN,5857
+    GIN,T,Qck Save Grp,.,0,5399,-1,5285,5858,5858,10
+    CIN,5294
+    CIN,ERR
+    TIN,5294
+    TIN,Dispatch 08,1840,0,0,0,0,-1,5295,5285,5293
+    TIN,5295
+    TIN,Tactical 08,2288,0,0,0,0,5294,5296,5285,5293
+    TIN,5296
+    TIN,ISU 08,7728,0,0,0,0,5295,-1,5285,5293
+    MEM
+    MEM,5
+    TIN,5295
+    TIN,Tactical 08,2288,0,0,0,0,5294,5296,5285,5293
+    GIN,5293
+    GIN,T,Parkville,1,0,-1,5297,5285,5294,5296,1
+    LOI,5285,5293
+    LOI,OK
+    GIN,5293
+    GIN,T,Parkville,1,0,-1,5297,5285,5294,5296,1
+    QGL,5285
+    QGL,2222221110
 
-February 14, 2012
+# February 14, 2012
 
-Creating an object that mimics the internal structure of the radio memory allows us to share that object across client and server. Both sides are then able to modify the object and apply those changes to or from the radio.
+Creating an object that mimics the internal structure of the radio memory allows
+us to share that object across client and server. Both sides are then able to
+modify the object and apply those changes to or from the radio.
 
 The major functions that provide the majority of functionality are:
 
-Populate object from radio by sending necessary commands to the radio and storing the responses.
+Populate object from radio by sending necessary commands to the radio and
+storing the responses.
 
-Add and remove channels from the object while preserving the integrity of the internal linked lists.
+Add and remove channels from the object while preserving the integrity of the
+internal linked lists.
 
-Compare a changed object with an object representing the current state of the radio and output commands that would set the radio to match that object.
+Compare a changed object with an object representing the current state of the
+radio and output commands that would set the radio to match that object.
 
-February 17, 2012
+# February 17, 2012
 
-STS,011000,          ï¿½ï¿½    ,,Balt Co P25     ,,D SCAN     I ï¿½  ,, 856.2125       ,,S0:**-*-*----   ,,GRP**3***7*--   ,,1,0,0,0
-STS,011000,          ï¿½ï¿½    ,,Balt Co P25     ,,   ID SCAN   ï¿½  ,, ï¿½ï¿½ï¿½ï¿½           ,,S0:**-*-*----   ,,GRP**3***7*--   ,,1,0,0,0
-STS,011000,          ï¿½ï¿½    ,,Balt Co P25     ,,D SCAN     I ï¿½  ,, ï¿½ï¿½ï¿½ï¿½     DAT   ,,S0:**-*-*----   ,,GRP**3***7*--   ,,1,0,0,0
-STS,011000,                ,,Balt Co P25     ,,ID SCAN      ï¿½  ,, ï¿½ï¿½ï¿½ï¿½           ,,S0:**3*-*----   ,,GRP**3***7*--   ,,0,1,0,0
-STS,011000,          ï¿½ï¿½    ,,Balt Co P25     ,,AN     ID SC ï¿½  ,, ï¿½ï¿½ï¿½ï¿½           ,,S0:**-*-*----   ,,GRP**3***7*--   ,,1,0,0,0
-STS,011000,                ,,Balt Co P25     ,,    ID SCAN  ï¿½  ,, ï¿½ï¿½ï¿½ï¿½           ,,S0:**3*-*----   ,,GRP**3***7*--   ,,0,1,0,0
-STS,011000,                ,,Balt Co P25     ,, ID SCAN     ï¿½  ,, ï¿½ï¿½ï¿½ï¿½           ,,S0:**-*-*----   ,,GRP**3***7*--   ,,1,1,0,0
-STS,011000,                ,,Balt Co P25     ,, SCAN     ID ï¿½  ,, 856.2125       ,,S0:**3*-*----   ,,GRP**3***7*--   ,,1,0,0,0
-STS,011000,          ï¿½ï¿½    ,,Balt Co P25     ,,Fire Main       ,, 859.9625 P25   ,,S0:**3*-*----   ,,GRP**3***7*--   ,,1,0,0,0
-STS,011000,          ï¿½ï¿½    ,,Fire A          ,,Fire Main       ,, 859.9625 P25   ,,S0:**-*-*----   ,,GRP**3***-*--   ,,1,0,0,0
-STS,011000,          ï¿½ï¿½    ,,Balt Co P25     ,,Fire Main       ,, 859.9625       ,,S0:**3*-*----   ,,GRP**3***7*--   ,,1,0,0,0
-STS,011000,          ï¿½ï¿½    ,,Fire A          ,,Fire Main       ,, 859.9625 P25   ,,S0:**-*-*----   ,,GRP**3***-*--   ,,1,0,0,0
-STS,011000,          ï¿½     ,,Balt Co P25     ,,Fire Main       ,, 859.9625 P25   ,,S0:**-*-*----   ,,GRP**3***-*--   ,,1,0,0,0
-STS,011000,          ï¿½     ,,Balt Co P25     ,,Fire Main       ,, 859.9625 P25   ,,S0:**3*-*----   ,,GRP**3***7*--   ,,1,0,0,0
-STS,011000,          ï¿½ï¿½    ,,Fire A          ,,Fire Main       ,, 859.9625 P25   ,,S0:**3*-*----   ,,GRP**3***7*--   ,,1,0,0,0
-STS,011000,          ï¿½     ,,Balt Co P25     ,,Fire Main       ,, 859.9625 P25   ,,S0:**-*-*----   ,,GRP**3***-*--   ,,1,0,0,0
-STS,011000,          ï¿½     ,,Fire A          ,,Fire Main       ,, 859.9625 P25   ,,S0:**-*-*----   ,,GRP**3***-*--   ,,1,0,0,0
-STS,011000,          ï¿½     ,,Fire A          ,,Fire Main       ,, 859.9625       ,,S0:**3*-*----   ,,GRP**3***7*--   ,,1,0,0,0
-STS,011000,          ï¿½     ,,Balt Co P25     ,,Fire Main       ,, 859.9625 P25   ,,S0:**3*-*----   ,,GRP**3***7*--   ,,1,0,0,0
-ERR                                                                                              
-STS,011000,          ï¿½ï¿½    ,,Fire A          ,,Fire Main       ,, 859.7125 P25   ,,S0:**3*-*----   ,,GRP**3***7*--   ,,1,0,0,0
-STS,011000,                ,,Fire A          ,,Fire Central    ,, 859.9625       ,,S0:**-*-*----   ,,GRP**3***-*--   ,,1,1,0,0
-STS,011000,          ï¿½     ,,Balt Co P25     ,,Fire Central    ,, 859.9625 P25   ,,S0:**3*-*----   ,,GRP**3***7*--   ,,1,0,0,0
-STS,011000,          ï¿½ï¿½    ,,Balt Co P25     ,,SCAN     ID  ï¿½  ,, 856.2125 DAT   ,,S0:**-*-*----   ,,GRP**3***7*--   ,,1,0,0,0
-STS,011000,          ï¿½ï¿½    ,,Balt Co P25     ,,  ID SCAN    ï¿½  ,, 856.2125       ,,S0:**3*-*----   ,,GRP**3***7*--   ,,1,0,0,0
-STS,011000,          ï¿½ï¿½    ,,Balt Co P25     ,,CAN     ID S ï¿½  ,, 856.2125 DAT   ,,S0:**3*-*----   ,,GRP**3***7*--   ,,1,0,0,0
-STS,011000,          ï¿½ï¿½    ,,Balt Co P25     ,,   ID SCAN   ï¿½  ,, 856.2125 DAT   ,,S0:**-*-*----   ,,GRP**3***7*--   ,,1,0,0,0
-STS,011000,          ï¿½ï¿½    ,,Balt Co P25     ,, SCAN     ID ï¿½  ,, 856.2125       ,,S0:**3*-*----   ,,GRP**3***7*--   ,,1,0,0,0
-STS,011000,                ,,Balt Co P25     ,,N     ID SCA ï¿½  ,, 856.2125       ,,S0:**3*-*----   ,,GRP**3***7*--   ,,1,0,0,0
-STS,011000,          ï¿½ï¿½    ,,Balt Co P25     ,,ID SCAN      ï¿½  ,, 856.2125 DAT   ,,S0:**3*-*----   ,,GRP**3***7*--   ,,1,0,0,0
-STS,011000,          ï¿½ï¿½    ,,Balt Co P25     ,,AN     ID SC ï¿½  ,, 856.2125 DAT   ,,S0:**-*-*----   ,,GRP**3***7*--   ,,1,0,0,0
-STS,011000,          ï¿½ï¿½    ,,Balt Co P25     ,,    ID SCAN  ï¿½  ,, 856.2125       ,,S0:**3*-*----   ,,GRP**3***7*--   ,,1,0,0,0
-STS,011000,          ï¿½ï¿½    ,,Balt Co P25     ,, ID SCAN     ï¿½  ,, 856.2125       ,,S0:**-*-*----   ,,GRP**3***7*--   ,,1,0,0,0
-PRG,OK
-ERR
-STS,011000,                ,,Remote Mode     ,,Keypad Lock     ,,                ,,                ,,                ,,1,1,0,0
-ERR
-STS,011000,                ,,Remote Mode     ,,Keypad Lock     ,,                ,,                ,,                ,,1,1,0,0
-STS,011000,                ,,Remote Mode     ,,Keypad Lock     ,,                ,,                ,,                ,,1,1,0,0
+    STS,011000,          ï¿½ï¿½    ,,Balt Co P25     ,,D SCAN     I ï¿½  ,, 856.2125       ,,S0:**-*-*----   ,,GRP**3***7*--   ,,1,0,0,0
+    STS,011000,          ï¿½ï¿½    ,,Balt Co P25     ,,   ID SCAN   ï¿½  ,, ï¿½ï¿½ï¿½ï¿½           ,,S0:**-*-*----   ,,GRP**3***7*--   ,,1,0,0,0
+    STS,011000,          ï¿½ï¿½    ,,Balt Co P25     ,,D SCAN     I ï¿½  ,, ï¿½ï¿½ï¿½ï¿½     DAT   ,,S0:**-*-*----   ,,GRP**3***7*--   ,,1,0,0,0
+    STS,011000,                ,,Balt Co P25     ,,ID SCAN      ï¿½  ,, ï¿½ï¿½ï¿½ï¿½           ,,S0:**3*-*----   ,,GRP**3***7*--   ,,0,1,0,0
+    STS,011000,          ï¿½ï¿½    ,,Balt Co P25     ,,AN     ID SC ï¿½  ,, ï¿½ï¿½ï¿½ï¿½           ,,S0:**-*-*----   ,,GRP**3***7*--   ,,1,0,0,0
+    STS,011000,                ,,Balt Co P25     ,,    ID SCAN  ï¿½  ,, ï¿½ï¿½ï¿½ï¿½           ,,S0:**3*-*----   ,,GRP**3***7*--   ,,0,1,0,0
+    STS,011000,                ,,Balt Co P25     ,, ID SCAN     ï¿½  ,, ï¿½ï¿½ï¿½ï¿½           ,,S0:**-*-*----   ,,GRP**3***7*--   ,,1,1,0,0
+    STS,011000,                ,,Balt Co P25     ,, SCAN     ID ï¿½  ,, 856.2125       ,,S0:**3*-*----   ,,GRP**3***7*--   ,,1,0,0,0
+    STS,011000,          ï¿½ï¿½    ,,Balt Co P25     ,,Fire Main       ,, 859.9625 P25   ,,S0:**3*-*----   ,,GRP**3***7*--   ,,1,0,0,0
+    STS,011000,          ï¿½ï¿½    ,,Fire A          ,,Fire Main       ,, 859.9625 P25   ,,S0:**-*-*----   ,,GRP**3***-*--   ,,1,0,0,0
+    STS,011000,          ï¿½ï¿½    ,,Balt Co P25     ,,Fire Main       ,, 859.9625       ,,S0:**3*-*----   ,,GRP**3***7*--   ,,1,0,0,0
+    STS,011000,          ï¿½ï¿½    ,,Fire A          ,,Fire Main       ,, 859.9625 P25   ,,S0:**-*-*----   ,,GRP**3***-*--   ,,1,0,0,0
+    STS,011000,          ï¿½     ,,Balt Co P25     ,,Fire Main       ,, 859.9625 P25   ,,S0:**-*-*----   ,,GRP**3***-*--   ,,1,0,0,0
+    STS,011000,          ï¿½     ,,Balt Co P25     ,,Fire Main       ,, 859.9625 P25   ,,S0:**3*-*----   ,,GRP**3***7*--   ,,1,0,0,0
+    STS,011000,          ï¿½ï¿½    ,,Fire A          ,,Fire Main       ,, 859.9625 P25   ,,S0:**3*-*----   ,,GRP**3***7*--   ,,1,0,0,0
+    STS,011000,          ï¿½     ,,Balt Co P25     ,,Fire Main       ,, 859.9625 P25   ,,S0:**-*-*----   ,,GRP**3***-*--   ,,1,0,0,0
+    STS,011000,          ï¿½     ,,Fire A          ,,Fire Main       ,, 859.9625 P25   ,,S0:**-*-*----   ,,GRP**3***-*--   ,,1,0,0,0
+    STS,011000,          ï¿½     ,,Fire A          ,,Fire Main       ,, 859.9625       ,,S0:**3*-*----   ,,GRP**3***7*--   ,,1,0,0,0
+    STS,011000,          ï¿½     ,,Balt Co P25     ,,Fire Main       ,, 859.9625 P25   ,,S0:**3*-*----   ,,GRP**3***7*--   ,,1,0,0,0
+    ERR
+    STS,011000,          ï¿½ï¿½    ,,Fire A          ,,Fire Main       ,, 859.7125 P25   ,,S0:**3*-*----   ,,GRP**3***7*--   ,,1,0,0,0
+    STS,011000,                ,,Fire A          ,,Fire Central    ,, 859.9625       ,,S0:**-*-*----   ,,GRP**3***-*--   ,,1,1,0,0
+    STS,011000,          ï¿½     ,,Balt Co P25     ,,Fire Central    ,, 859.9625 P25   ,,S0:**3*-*----   ,,GRP**3***7*--   ,,1,0,0,0
+    STS,011000,          ï¿½ï¿½    ,,Balt Co P25     ,,SCAN     ID  ï¿½  ,, 856.2125 DAT   ,,S0:**-*-*----   ,,GRP**3***7*--   ,,1,0,0,0
+    STS,011000,          ï¿½ï¿½    ,,Balt Co P25     ,,  ID SCAN    ï¿½  ,, 856.2125       ,,S0:**3*-*----   ,,GRP**3***7*--   ,,1,0,0,0
+    STS,011000,          ï¿½ï¿½    ,,Balt Co P25     ,,CAN     ID S ï¿½  ,, 856.2125 DAT   ,,S0:**3*-*----   ,,GRP**3***7*--   ,,1,0,0,0
+    STS,011000,          ï¿½ï¿½    ,,Balt Co P25     ,,   ID SCAN   ï¿½  ,, 856.2125 DAT   ,,S0:**-*-*----   ,,GRP**3***7*--   ,,1,0,0,0
+    STS,011000,          ï¿½ï¿½    ,,Balt Co P25     ,, SCAN     ID ï¿½  ,, 856.2125       ,,S0:**3*-*----   ,,GRP**3***7*--   ,,1,0,0,0
+    STS,011000,                ,,Balt Co P25     ,,N     ID SCA ï¿½  ,, 856.2125       ,,S0:**3*-*----   ,,GRP**3***7*--   ,,1,0,0,0
+    STS,011000,          ï¿½ï¿½    ,,Balt Co P25     ,,ID SCAN      ï¿½  ,, 856.2125 DAT   ,,S0:**3*-*----   ,,GRP**3***7*--   ,,1,0,0,0
+    STS,011000,          ï¿½ï¿½    ,,Balt Co P25     ,,AN     ID SC ï¿½  ,, 856.2125 DAT   ,,S0:**-*-*----   ,,GRP**3***7*--   ,,1,0,0,0
+    STS,011000,          ï¿½ï¿½    ,,Balt Co P25     ,,    ID SCAN  ï¿½  ,, 856.2125       ,,S0:**3*-*----   ,,GRP**3***7*--   ,,1,0,0,0
+    STS,011000,          ï¿½ï¿½    ,,Balt Co P25     ,, ID SCAN     ï¿½  ,, 856.2125       ,,S0:**-*-*----   ,,GRP**3***7*--   ,,1,0,0,0
+    PRG,OK
+    ERR
+    STS,011000,                ,,Remote Mode     ,,Keypad Lock     ,,                ,,                ,,                ,,1,1,0,0
+    ERR
+    STS,011000,                ,,Remote Mode     ,,Keypad Lock     ,,                ,,                ,,                ,,1,1,0,0
+    STS,011000,                ,,Remote Mode     ,,Keypad Lock     ,,                ,,                ,,                ,,1,1,0,0
 
-STS
-ERR
-STS,011000,                ,,Remote Mode     ,,Keypad Lock     ,,                ,,                ,,                ,,1,1,0,0
-STS
-STS,011000,                ,,Remote Mode     ,,Keypad Lock     ,,                ,,                ,,                ,,1,1,0,0
-SIN,5875
-SIN,MP25,Balt Co P25,3,2,0,2,,AUTO,0,MAN,8,5166,5129,5880,5880,3
-GIN,5880
-GIN,C,System Frequency,.,0,-1,-1,5875,5882,5889,1
-TFQ,5882
-TFQ,08566875,,0,-1,5883,5875,5880
-TFQ,5882
-TFQ,08566875,,0,-1,5883,5875,5880
-TFQ,5883
-TFQ,08540375,,0,5882,5884,5875,5880
-TFQ,5884
-TFQ,08540625,,0,5883,5885,5875,5880
-TFQ,5885
-TFQ,08540875,,0,5884,5886,5875,5880
-TFQ,5886
-TFQ,08564687,,0,5885,5887,5875,5880
-TFQ,5887
-TFQ,08562125,,0,5886,5888,5875,5880
-TFQ,5888
-TFQ,08579625,,0,5887,5889,5875,5880
-TFQ,5889
-TFQ,08582125,,0,5888,-1,5875,5880
-DCH,5883
-DCH,OK
-DCH,5887
-DCH,OK
-DCH,5888
-DCH,OK
-DCH,5889
-DCH,OK
-TFQ,5886,08564625,,0
-TFQ,OK
-GIN,5880
-GIN,C,System Frequency,.,0,-1,-1,5875,5882,5886,1
-tfq,5882
-ERR
-TFQ,5882
-TFQ,08566875,,0,-1,5884,5875,5880
-TFQ,5884
-TFQ,08540625,,0,5882,5885,5875,5880
-TFQ,5885
-TFQ,08540875,,0,5884,5886,5875,5880
-TFQ,5886
-TFQ,08564625,,0,5885,-1,5875,5880
-epg,
-ERR
-EPG
-EPG,OK
+    STS
+    ERR
+    STS,011000,                ,,Remote Mode     ,,Keypad Lock     ,,                ,,                ,,                ,,1,1,0,0
+    STS
+    STS,011000,                ,,Remote Mode     ,,Keypad Lock     ,,                ,,                ,,                ,,1,1,0,0
+    SIN,5875
+    SIN,MP25,Balt Co P25,3,2,0,2,,AUTO,0,MAN,8,5166,5129,5880,5880,3
+    GIN,5880
+    GIN,C,System Frequency,.,0,-1,-1,5875,5882,5889,1
+    TFQ,5882
+    TFQ,08566875,,0,-1,5883,5875,5880
+    TFQ,5882
+    TFQ,08566875,,0,-1,5883,5875,5880
+    TFQ,5883
+    TFQ,08540375,,0,5882,5884,5875,5880
+    TFQ,5884
+    TFQ,08540625,,0,5883,5885,5875,5880
+    TFQ,5885
+    TFQ,08540875,,0,5884,5886,5875,5880
+    TFQ,5886
+    TFQ,08564687,,0,5885,5887,5875,5880
+    TFQ,5887
+    TFQ,08562125,,0,5886,5888,5875,5880
+    TFQ,5888
+    TFQ,08579625,,0,5887,5889,5875,5880
+    TFQ,5889
+    TFQ,08582125,,0,5888,-1,5875,5880
+    DCH,5883
+    DCH,OK
+    DCH,5887
+    DCH,OK
+    DCH,5888
+    DCH,OK
+    DCH,5889
+    DCH,OK
+    TFQ,5886,08564625,,0
+    TFQ,OK
+    GIN,5880
+    GIN,C,System Frequency,.,0,-1,-1,5875,5882,5886,1
+    tfq,5882
+    ERR
+    TFQ,5882
+    TFQ,08566875,,0,-1,5884,5875,5880
+    TFQ,5884
+    TFQ,08540625,,0,5882,5885,5875,5880
+    TFQ,5885
+    TFQ,08540875,,0,5884,5886,5875,5880
+    TFQ,5886
+    TFQ,08564625,,0,5885,-1,5875,5880
+    epg,
+    ERR
+    EPG
+    EPG,OK
 
-sinSIN
-SIN,ERR
-SIH
-SIH,5285
-SIN,582285
-SIN,M82S,Baltimore County,1,2,0,2,,AUTO,0,AUTO,8,-1,5166,5287,5287,4
-SIN,5166
-SIN,M82S,Baltimore City,2,2,0,2,,AUTO,0,AUTO,9,5285,5875,5168,5168,2
-SIN,5875
-SIN,MP25,Balt Co P25,3,2,0,2,,AUTO,0,AUTO,10,5166,5129,5880,5880,3
-GIN,5287
-GIN,C,System Frequency,.,0,-1,-1,5285,5289,5292,1
-GIN,GIN,5289
-GIN,ERR
-GIN,5292
-GIN,ERR
-TRN,5875
-TRN,1,,,,0,,0,0,,,,,,,,,,,,,-1,-1,5881,5881
-STS,011000,                ,,Remote Mode     ,,Keypad Lock     ,,                ,,                ,,                ,,1,1,0,0
-AGC,5875
-AGC,ERR
-ACT,5875
-ACT,-1
-AGT,5875
-AGT,5890
-TRN,5875
-TRN,1,,,,0,,0,0,,,,,,,,,,,,,5890,5890,5881,5881
-GIN,5875,pOLIPolice A,1,0
-GIN,ERR
-gin,GIN,5890,POLICERO=pOLPolice A,1,0
-GIN,OK
-IGN,GIN,5890
-GIN,T,Police A,1,0,-1,-1,5875,-1,-1,1
-AGT,5875
-AGT,5891
-GIN,5891,Police B,1,0
-GIN,OK
-AGT,589875
-AGT,5892
-agt,AGT,5875
-ERR
-AGR,GT,5875
-AGT,5893
-AGT,5875
-AGT,5894
-AGT,5875
-AGT,5895
-AGT,59875
-AGT,5896
-GIN,5891,Police CB,1,0
-GIN,OK
-GIN,5892,Police C,1,0
-GIN,OK
-GIN,5893,Police D,1,0
-GIN,OK
-GIN,5894,Police E,1,0
-GIN,OK
-GIN ,5895,Police F,1,0
-GIN,OK
-GIN,5896,Fire A,1,0
-GIN,OK
-AGRT,5875
-AGT,5897
-GIN,5897,Fireb B,1,0
-GIN,OK
-GIN,5890
-GIN,T,Police A,1,0,-1,5891,5875,-1,-1,1
-GIN,5891
-GIN,T,Police B,1,0,5890,5892,5875,-1,-1,2
-gGIN,5890,Police A,1,0
-GIN,OK
-GIN,5891,Police B,2,0
-GIN,OK
-GIN,5892,Police BC, 3,0
-GIN,OK
-GIN,5893,Police D,4,0
-GIN,OK
-GIN,5894,Pll;olice E,5,0
-GIN,OK
-GIN,5895,Police F,5,6,0
-GIN,OK
-GIN,5896,Fire A,7,0
-GIN,OK
-GIN,5897,Fire B,8,0
-GIN,OK
-qlg,QGL,5875
-QGL,2222222200
-GIN,5890
-GIN,T,Police A,1,0,-1,5891,5875,-1,-1,1
-ACT,5890
-ACT,5898
-ACT,5890
-ACT,5899
-TIN,TIN,ERR
+    sinSIN
+    SIN,ERR
+    SIH
+    SIH,5285
+    SIN,582285
+    SIN,M82S,Baltimore County,1,2,0,2,,AUTO,0,AUTO,8,-1,5166,5287,5287,4
+    SIN,5166
+    SIN,M82S,Baltimore City,2,2,0,2,,AUTO,0,AUTO,9,5285,5875,5168,5168,2
+    SIN,5875
+    SIN,MP25,Balt Co P25,3,2,0,2,,AUTO,0,AUTO,10,5166,5129,5880,5880,3
+    GIN,5287
+    GIN,C,System Frequency,.,0,-1,-1,5285,5289,5292,1
+    GIN,GIN,5289
+    GIN,ERR
+    GIN,5292
+    GIN,ERR
+    TRN,5875
+    TRN,1,,,,0,,0,0,,,,,,,,,,,,,-1,-1,5881,5881
+    STS,011000,                ,,Remote Mode     ,,Keypad Lock     ,,                ,,                ,,                ,,1,1,0,0
+    AGC,5875
+    AGC,ERR
+    ACT,5875
+    ACT,-1
+    AGT,5875
+    AGT,5890
+    TRN,5875
+    TRN,1,,,,0,,0,0,,,,,,,,,,,,,5890,5890,5881,5881
+    GIN,5875,pOLIPolice A,1,0
+    GIN,ERR
+    gin,GIN,5890,POLICERO=pOLPolice A,1,0
+    GIN,OK
+    IGN,GIN,5890
+    GIN,T,Police A,1,0,-1,-1,5875,-1,-1,1
+    AGT,5875
+    AGT,5891
+    GIN,5891,Police B,1,0
+    GIN,OK
+    AGT,589875
+    AGT,5892
+    agt,AGT,5875
+    ERR
+    AGR,GT,5875
+    AGT,5893
+    AGT,5875
+    AGT,5894
+    AGT,5875
+    AGT,5895
+    AGT,59875
+    AGT,5896
+    GIN,5891,Police CB,1,0
+    GIN,OK
+    GIN,5892,Police C,1,0
+    GIN,OK
+    GIN,5893,Police D,1,0
+    GIN,OK
+    GIN,5894,Police E,1,0
+    GIN,OK
+    GIN ,5895,Police F,1,0
+    GIN,OK
+    GIN,5896,Fire A,1,0
+    GIN,OK
+    AGRT,5875
+    AGT,5897
+    GIN,5897,Fireb B,1,0
+    GIN,OK
+    GIN,5890
+    GIN,T,Police A,1,0,-1,5891,5875,-1,-1,1
+    GIN,5891
+    GIN,T,Police B,1,0,5890,5892,5875,-1,-1,2
+    gGIN,5890,Police A,1,0
+    GIN,OK
+    GIN,5891,Police B,2,0
+    GIN,OK
+    GIN,5892,Police BC, 3,0
+    GIN,OK
+    GIN,5893,Police D,4,0
+    GIN,OK
+    GIN,5894,Pll;olice E,5,0
+    GIN,OK
+    GIN,5895,Police F,5,6,0
+    GIN,OK
+    GIN,5896,Fire A,7,0
+    GIN,OK
+    GIN,5897,Fire B,8,0
+    GIN,OK
+    qlg,QGL,5875
+    QGL,2222222200
+    GIN,5890
+    GIN,T,Police A,1,0,-1,5891,5875,-1,-1,1
+    ACT,5890
+    ACT,5898
+    ACT,5890
+    ACT,5899
+    TIN,TIN,ERR
 
-ERR
-TIN
-TIN,ERR
-TIN,5898
-TIN,ID:0,0,0,0,0,0,-1,5899,5875,5890
-TIN,Wilkens, Ops,9600,0,0,0,0
-TIN,ERR
-tin,5898,wilWilkens Ops,9600,0,0,0,0
-ERR
-TIN,5898,Wilkens Ops,9600,0,0,0,0
-TIN,OK
-actACT,5891
-ACT,5900
-ACT,5891
-ACT,5901
-ACT,5892
-ACT,5902
-ACT,5892
-ACT,5903
-ACT,5893
-ACT,5904
-ACT,5894
-ACT,5905
-ACT,5894
-ACT,5906
-ACT,5895
-ACT,5907
-ACT,5896
-ACT,5908
-ACT,590896
-ACT,5909
-ACT,5896
-ACT,5910
-ACT,5896
-ACT,5911
-TIN,5899,wOOWoodlawn Ops,9601,0,0,0,0
-TIN,OK
-TIN,5900,Franklin Ops,9602,0,0,0,0
-TIN,OK
-WIN,TIN,5901,Pikesville Ops,9603,0,0,0,0
-TIN,OK
-TIN,95902,Towonson Ops,9604,0,0,0,0
-TIN,OK
-TIN,5903,Parkville Ops,9606,0,0,0,0
-TIN,OK
-TIN<,5904,Cockesysville, OPS,9605,0,0,0,0ps,9605,0,0,0,0
-TIN,OK
-TIN,95905,White Marsh Ops,9607,0,0,0,0
-TIN,OK
-TIN,95906,North Point Ops,9609,0,0,0,0
-TIN,OK
-TIN,95907,Essex Ops,9608,0,0,0,0
-TIN,OK
-TIN,5908,Fire Main,9450,0,0,0,0
-TIN,OK
-TIN,5909,Fire Central,9451,0,0,0,0
-TIN,OK
-TIN,959010,Fire East,9TIN,ERR
-452
-ERR
-TIN,5910,Fire East,95452,0,0,0,0
-TIN,OK
-TIN,5911,Fire West,9453,0,0,0,0
-TIN,OK
-epgEPG
-EPG,OK
-STS
-STS,011000, Ž           ,,Baltimore County,, 857.9625MHz    ,, žœš           ,,S0:*---------   ,,GRP----------   ,,0,1,0,0
-PRG
-PRG,OK
-QGL,5875
-QGL,1111111200
-sin,5875
-ERR
-SIN<,5875
-SIN,MP25,Balt Co P25,3,2,0,2,,AUTO,0,AUTO,10,5166,5129,5880,5880,3
-ginGIN5890
-ERR
-GIN,5896
-GIN,T,Fire A,7,0,5895,5897,5875,5908,5911,7
-GIN,5897
-GIN,T,Fire B,8,0,5896,-1,5875,-1,-1,8
-ACT,5897
-ACT,5912
-tin,TIN,5912,FBCFD FIND<,9579,0,0,0,0
-TIN,OK
-QGL,5875
-QGL,1111111100
-]
-ERR
-epgEPG
-EPG,OK
-stSTS
-STS,011000, Ž           ,,Baltimore County,, 857.9625MHz    ,, žœš           ,,S0:*---------   ,,GRP----------   ,,0,1,0,0
-keyKEY,S,P
-KEY,OK
-STS
-STS,011000,                ,,Balt Co P25     ,,CH   ID SEAR   ,, žœš           ,,S0:**-*-*----   ,,GRP12345678--   ,,0,0,0,0
-KEY,Sp,P
-KEY,OK
-STS
-STS,011000,          ¨©    ,,Balt Co P25     ,,ID SCAN         ,, 856.2125       ,,S0:**-*-*----   ,,GRP12345678--   ,,1,0,0,0
-STS
-STS,011000,          §     ,,Balt Co P25     ,, SCAN     ID   ,, 856.2125 DAT   ,,S0:**3*-*----   ,,GRP12345678--   ,,1,0,0,0
-STS
-STS,011000,          §     ,,Balt Co P25     ,, ID SCAN       ,, 856.2125       ,,S0:**-*-*----   ,,GRP12345678--   ,,1,0,0,0
-STS
-STS,011000,          §     ,,Balt Co P25     ,, SCAN     ID   ,, 856.2125       ,,S0:**3*-*----   ,,GRP12345678--   ,,1,0,0,0
-STS
-STS,011000,          ¨©    ,,Balt Co P25     ,,AN     ID SC   ,, 856.2125 DAT   ,,S0:**-*-*----   ,,GRP12345678--   ,,1,0,0,0
-STS
-STS,011000,          ¨©    ,,Balt Co P25     ,,    ID SCAN    ,, 856.2125       ,,S0:**3*-*----   ,,GRP12345678--   ,,1,0,0,0
-STS
-STS,011000,                ,,Balt Co P25     ,, ID SCAN       ,, 856.2125       ,,S0:**-*-*----   ,,GRP12345678--   ,,1,0,0,0
-STS
-STS,011000,          ¨©    ,,Balt Co P25     ,, SCAN     ID   ,, 856.2125 DAT   ,,S0:**3*-*----   ,,GRP12345678--   ,,1,0,0,0
-STS
-STS,011000,          ¬­    ,,Balt Co P25     ,,North Point Ops ,, 859.2125 LNK   ,,S0:**3*-*----   ,,GRP12345678--   ,,1,0,0,0
-STS
-STS,011000,          ¬­    ,,Police E        ,,North Point Ops ,, 859.2125 LNK   ,,S0:**-*-*----   ,,GRP1234-678--   ,,1,0,0,0
-STS
-STS,011000,          ¬­    ,,Balt Co P25     ,, SCAN     ID   ,, 856.2125       ,,S0:**3*-*----   ,,GRP12345678--   ,,1,0,0,0
-
+    ERR
+    TIN
+    TIN,ERR
+    TIN,5898
+    TIN,ID:0,0,0,0,0,0,-1,5899,5875,5890
+    TIN,Wilkens, Ops,9600,0,0,0,0
+    TIN,ERR
+    tin,5898,wilWilkens Ops,9600,0,0,0,0
+    ERR
+    TIN,5898,Wilkens Ops,9600,0,0,0,0
+    TIN,OK
+    actACT,5891
+    ACT,5900
+    ACT,5891
+    ACT,5901
+    ACT,5892
+    ACT,5902
+    ACT,5892
+    ACT,5903
+    ACT,5893
+    ACT,5904
+    ACT,5894
+    ACT,5905
+    ACT,5894
+    ACT,5906
+    ACT,5895
+    ACT,5907
+    ACT,5896
+    ACT,5908
+    ACT,590896
+    ACT,5909
+    ACT,5896
+    ACT,5910
+    ACT,5896
+    ACT,5911
+    TIN,5899,wOOWoodlawn Ops,9601,0,0,0,0
+    TIN,OK
+    TIN,5900,Franklin Ops,9602,0,0,0,0
+    TIN,OK
+    WIN,TIN,5901,Pikesville Ops,9603,0,0,0,0
+    TIN,OK
+    TIN,95902,Towonson Ops,9604,0,0,0,0
+    TIN,OK
+    TIN,5903,Parkville Ops,9606,0,0,0,0
+    TIN,OK
+    TIN<,5904,Cockesysville, OPS,9605,0,0,0,0ps,9605,0,0,0,0
+    TIN,OK
+    TIN,95905,White Marsh Ops,9607,0,0,0,0
+    TIN,OK
+    TIN,95906,North Point Ops,9609,0,0,0,0
+    TIN,OK
+    TIN,95907,Essex Ops,9608,0,0,0,0
+    TIN,OK
+    TIN,5908,Fire Main,9450,0,0,0,0
+    TIN,OK
+    TIN,5909,Fire Central,9451,0,0,0,0
+    TIN,OK
+    TIN,959010,Fire East,9TIN,ERR
+    452
+    ERR
+    TIN,5910,Fire East,95452,0,0,0,0
+    TIN,OK
+    TIN,5911,Fire West,9453,0,0,0,0
+    TIN,OK
+    epgEPG
+    EPG,OK
+    STS
+    STS,011000, ï¿½ï¿½ï¿½ï¿½           ,,Baltimore County,, 857.9625MHz    ,, ï¿½ï¿½ï¿½ï¿½           ,,S0:*---------   ,,GRP----------   ,,0,1,0,0
+    PRG
+    PRG,OK
+    QGL,5875
+    QGL,1111111200
+    sin,5875
+    ERR
+    SIN<,5875
+    SIN,MP25,Balt Co P25,3,2,0,2,,AUTO,0,AUTO,10,5166,5129,5880,5880,3
+    ginGIN5890
+    ERR
+    GIN,5896
+    GIN,T,Fire A,7,0,5895,5897,5875,5908,5911,7
+    GIN,5897
+    GIN,T,Fire B,8,0,5896,-1,5875,-1,-1,8
+    ACT,5897
+    ACT,5912
+    tin,TIN,5912,FBCFD FIND<,9579,0,0,0,0
+    TIN,OK
+    QGL,5875
+    QGL,1111111100
+    ]
+    ERR
+    epgEPG
+    EPG,OK
+    stSTS
+    STS,011000, ï¿½ï¿½ï¿½ï¿½           ,,Baltimore County,, 857.9625MHz    ,, ï¿½ï¿½ï¿½ï¿½           ,,S0:*---------   ,,GRP----------   ,,0,1,0,0
+    keyKEY,S,P
+    KEY,OK
+    STS
+    STS,011000,                ,,Balt Co P25     ,,CH   ID SEAR ï¿½  ,, ï¿½ï¿½ï¿½ï¿½           ,,S0:**-*-*----   ,,GRP12345678--   ,,0,0,0,0
+    KEY,Sp,P
+    KEY,OK
+    STS
+    STS,011000,          ï¿½ï¿½    ,,Balt Co P25     ,,ID SCAN         ,, 856.2125       ,,S0:**-*-*----   ,,GRP12345678--   ,,1,0,0,0
+    STS
+    STS,011000,          ï¿½     ,,Balt Co P25     ,, SCAN     ID ï¿½  ,, 856.2125 DAT   ,,S0:**3*-*----   ,,GRP12345678--   ,,1,0,0,0
+    STS
+    STS,011000,          ï¿½     ,,Balt Co P25     ,, ID SCAN     ï¿½  ,, 856.2125       ,,S0:**-*-*----   ,,GRP12345678--   ,,1,0,0,0
+    STS
+    STS,011000,          ï¿½     ,,Balt Co P25     ,, SCAN     ID ï¿½  ,, 856.2125       ,,S0:**3*-*----   ,,GRP12345678--   ,,1,0,0,0
+    STS
+    STS,011000,          ï¿½ï¿½    ,,Balt Co P25     ,,AN     ID SC ï¿½  ,, 856.2125 DAT   ,,S0:**-*-*----   ,,GRP12345678--   ,,1,0,0,0
+    STS
+    STS,011000,          ï¿½ï¿½    ,,Balt Co P25     ,,    ID SCAN  ï¿½  ,, 856.2125       ,,S0:**3*-*----   ,,GRP12345678--   ,,1,0,0,0
+    STS
+    STS,011000,                ,,Balt Co P25     ,, ID SCAN     ï¿½  ,, 856.2125       ,,S0:**-*-*----   ,,GRP12345678--   ,,1,0,0,0
+    STS
+    STS,011000,          ï¿½ï¿½    ,,Balt Co P25     ,, SCAN     ID ï¿½  ,, 856.2125 DAT   ,,S0:**3*-*----   ,,GRP12345678--   ,,1,0,0,0
+    STS
+    STS,011000,          ï¿½ï¿½    ,,Balt Co P25     ,,North Point Ops ,, 859.2125 LNK   ,,S0:**3*-*----   ,,GRP12345678--   ,,1,0,0,0
+    STS
+    STS,011000,          ï¿½ï¿½    ,,Police E        ,,North Point Ops ,, 859.2125 LNK   ,,S0:**-*-*----   ,,GRP1234-678--   ,,1,0,0,0
+    STS
+    STS,011000,          ï¿½ï¿½    ,,Balt Co P25     ,, SCAN     ID ï¿½  ,, 856.2125       ,,S0:**3*-*----   ,,GRP12345678--   ,,1,0,0,0
